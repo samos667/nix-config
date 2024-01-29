@@ -38,7 +38,10 @@
   # };
 
   programs.fish.enable = true;
-
+  
+  virtualisation.docker.enable = true;
+  users.extraGroups.docker.members = [ "sam" ];
+  
   # List services that you want to enable:
 
   services.qemuGuest.enable = true;

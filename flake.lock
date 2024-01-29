@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "astronvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705843177,
+        "narHash": "sha256-t/wer3mTdHBRS8FxcZEiqwiO9rNn73w9x1fzUYRp7qo=",
+        "owner": "AstroNvim",
+        "repo": "AstroNvim",
+        "rev": "8a019756cf45cb8f08dc11ce0396a577bd716936",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AstroNvim",
+        "ref": "v3.42.0",
+        "repo": "AstroNvim",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -37,26 +54,11 @@
         "type": "github"
       }
     },
-    "nvimdots": {
-      "locked": {
-        "lastModified": 1705974621,
-        "narHash": "sha256-bmDJJM9opSdD16DNOI/n8az8QG0KO6Om4j7AxP4L54w=",
-        "owner": "ayamir",
-        "repo": "nvimdots",
-        "rev": "6050446b682ec43e6aa0f7e7635f839e8e1f8c0a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ayamir",
-        "repo": "nvimdots",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
+        "astronvim": "astronvim",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs",
-        "nvimdots": "nvimdots"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

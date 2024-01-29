@@ -43,6 +43,7 @@
     zstd
     gnupg
     fd
+    bat
 
     # nix related
     #

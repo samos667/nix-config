@@ -7,7 +7,10 @@
     # home-manager, used for managing user configuration
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nvimdots.url = "github:ayamir/nvimdots";
+    astronvim = {
+      url = "github:AstroNvim/AstroNvim/v3.42.0";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
