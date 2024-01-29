@@ -44,6 +44,8 @@
     gnupg
     fd
     bat
+    wezterm
+    bitwarden-cli
 
     # nix related
     #

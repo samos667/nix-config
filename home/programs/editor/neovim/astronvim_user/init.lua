@@ -66,6 +66,13 @@ return {
 
     -- colorscheme
     { import = "astrocommunity.colorscheme.catppuccin" },
+    -- require('smartyank').setup {
+    --   osc52 = {
+    --     enabled = true,
+    --     ssh_only = false,        -- false to OSC52 yank also in local sessions
+    --     silent = false,         -- true to disable the "n chars copied" echo
+    -- },
+    -- }
     {
       "catppuccin/nvim",
       name = "catppuccin",
@@ -395,7 +402,18 @@ return {
         opts.automatic_installation = false
       end,
     },
-
+    {
+      "ibhagwan/smartyank.nvim",
+      init = function()
+        require('smartyank').setup({
+          osc52 = {
+            enabled = true,
+            ssh_only = false,        -- false to OSC52 yank also in local sessions
+            silent = false,         -- true to disable the "n chars copied" echo
+          },
+        })
+      end,
+    },
     {
       "jose-elias-alvarez/null-ls.nvim",
       opts = function(_, opts)
