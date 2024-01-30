@@ -359,6 +359,17 @@ return {
         opts.automatic_installation = false
       end,
     },
+
+    {
+      "lewis6991/gitsigns.nvim",
+      event = { "CursorHold", "CursorHoldI" },
+      init = function()
+        require('gitsigns').setup({
+          current_line_blame = true,
+        })
+      end,
+    },
+
     {
       "ibhagwan/smartyank.nvim",
       init = function()

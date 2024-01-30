@@ -62,10 +62,20 @@
     iftop # network monitoring
   ];
 
-  # basic configuration of git, please change to your own
+  # basic configuration of git
   programs.git = {
     enable = true;
     userName = "samos667";
     userEmail = "samos667@k8s-ekip.cc";
+  };
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host github.com
+          Hostname github.com
+          User git
+          Port 22
+          IdentityFile /home/sam/.ssh/id_ed25519-github
+    '';
   };
 }
