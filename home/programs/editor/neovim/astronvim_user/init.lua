@@ -66,13 +66,6 @@ return {
 
     -- colorscheme
     { import = "astrocommunity.colorscheme.catppuccin" },
-    -- require('smartyank').setup {
-    --   osc52 = {
-    --     enabled = true,
-    --     ssh_only = false,        -- false to OSC52 yank also in local sessions
-    --     silent = false,         -- true to disable the "n chars copied" echo
-    -- },
-    -- }
     {
       "catppuccin/nvim",
       name = "catppuccin",
@@ -114,10 +107,6 @@ return {
           "gitcommit",
           "latex",
           "sql",
-          -- Lisp like
-          "fennel",
-          "clojure",
-          "commonlisp",
           -- customized languages:
           "scheme",
         })
@@ -142,38 +131,6 @@ return {
       "eraserhd/parinfer-rust",
       build = "cargo build --release",
       ft = { "scm", "scheme" },
-    },
-    { "Olical/nfnl",                                       ft = "fennel" },
-    {
-      "Olical/conjure",
-      ft = { "clojure", "fennel", "python", "scheme" }, -- etc
-      -- [Optional] cmp-conjure for cmp
-      dependencies = {
-        {
-          "PaterJason/cmp-conjure",
-          config = function()
-            local cmp = require("cmp")
-            local config = cmp.get_config()
-            table.insert(config.sources, {
-              name = "buffer",
-              option = {
-                sources = {
-                  { name = "conjure" },
-                },
-              },
-            })
-            cmp.setup(config)
-          end,
-        },
-      },
-      config = function(_, opts)
-        require("conjure.main").main()
-        require("conjure.mapping")["on-filetype"]()
-      end,
-      init = function()
-        -- Set configuration options here
-        vim.g["conjure#debug"] = true
-      end,
     },
     {
       "nvim-orgmode/orgmode",
@@ -411,6 +368,9 @@ return {
             ssh_only = false,        -- false to OSC52 yank also in local sessions
             silent = false,         -- true to disable the "n chars copied" echo
           },
+          clipboard = {
+            enabled = true,
+          },
         })
       end,
     },
@@ -460,7 +420,6 @@ return {
             formatting.nginx_beautifier,         -- Nginx formatter
             formatting.verible_verilog_format,   -- Verilog formatter
             formatting.emacs_scheme_mode,        -- using emacs in batch mode to format scheme files.
-            formatting.fnlfmt,                   -- Format Fennel code
           })
         end
       end,
@@ -566,8 +525,6 @@ return {
       "ruff_lsp",       -- extremely fast Python linter and code transformation
       "jdtls",          -- java
       "nil_ls",         -- nix language server
-      "bufls",          -- protocol buffer language server
-      "zls",            -- zig language server
       ---- HDL
       "verible",        -- verilog language server
       ---- Operation & Cloud Nativautoindente

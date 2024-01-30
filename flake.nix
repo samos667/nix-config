@@ -1,5 +1,5 @@
 {
-  description = "Samos NixOS Flake";
+  description = "Samos NixOS Flake inspired by https://github.com/ryan4yin/nix-config";
 
   inputs = {
     # Official NixOS package source, using nixos-23.11 branch here

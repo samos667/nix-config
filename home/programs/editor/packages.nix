@@ -35,9 +35,6 @@
       cargo # rust package manager
       rustfmt
 
-      #-- zig
-      zls
-
       #-- nix
       nil
       rnix-lsp
