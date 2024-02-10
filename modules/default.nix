@@ -1,11 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda"; # or "nodev" for efi only
-
-  networking.hostName = "workstation"; # Define your hostname.
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
@@ -18,7 +13,8 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
   nix.settings.trusted-users = ["sam"];
-
+  
+  system.stateVersion = "23.11";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # List packages installed in system profile. To search, run:
@@ -44,12 +40,6 @@
   
   # List services that you want to enable:
 
-  services.qemuGuest.enable = true;
-
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
-
 }

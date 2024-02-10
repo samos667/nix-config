@@ -21,18 +21,18 @@
   }: {
     nixosConfigurations = {
 
-      "workstation" = nixpkgs.lib.nixosSystem {
+      "ctemplate" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         modules = [
-          ./hosts/workstation
+          ./hosts/ctemplate
 	  home-manager.nixosModules.home-manager
 	  {
 	    home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
 
 	    home-manager.extraSpecialArgs = inputs;
-	    home-manager.users.sam = import ./home;
+	    home-manager.users.sam = import ./home/ctemplate/home.nix;
 
 	  }
         ];
