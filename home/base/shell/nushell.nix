@@ -33,9 +33,8 @@
       '';
       shellAliases = {
         v = "nvim";
-        vi = "nvim";
-        vim = "nvim";
-        nano = "nvim";
+        d = "docker";
+        dc = "docker compose";
       };
     };
     carapace.enable = true;
@@ -44,6 +43,30 @@
     starship = {
       enable = true;
       settings = {
+        os = {
+          disabled = false;
+        };
+        os.symbols = {
+          Debian = "🌀 ";
+          FreeBSD = "😈 ";
+          Linux = "🐧 ";
+          NixOS = "❄️ ";
+          OpenBSD = "🐡 ";
+          Raspbian = "🍓 ";
+          Redhat = "🎩 ";
+          Windows = "🪟 ";
+        };
+        status = {
+          symbol = "🔴 ";
+          success_symbol = "🟢 SUCCESS";
+          format = "[$symbol$common_meaning$signal_name$maybe_int]($style) ";
+          map_symbol = true;
+          disabled = false;
+        };
+        time = {
+          disabled = false;
+          format = "🕙[$time]($style) ";
+        };
         memory_usage = {
           disabled = false;
           threshold = -1;
