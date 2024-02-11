@@ -1,6 +1,6 @@
 {
   imports = [
     ./common.nix
-    # ./editor
+    ./editor
   ];
 }
