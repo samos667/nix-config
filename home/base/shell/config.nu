@@ -70,6 +70,41 @@ let catppuccin_theme = {
     shape_custom: {attr: b}
 }
 
+let fish_completer = {|spans|
+    fish --command $'complete "--do-complete=($spans | str join " ")"'
+    | $"value(char tab)description(char newline)" + $in
+    | from tsv --flexible --no-infer
+}
+
+let carapace_completer = {|spans: list<string>|
+    carapace $spans.0 nushell ...$spans
+    | from json
+    | if ($in | default [] | where value =~ '^-.*ERR$' | is-empty) { $in } else { null }
+}
+
+# This completer will use carapace by default
+let external_completer = {|spans|
+    let expanded_alias = scope aliases
+    | where name == $spans.0
+    | get -i 0.expansion
+
+    let spans = if $expanded_alias != null {
+        $spans
+        | skip 1
+        | prepend ($expanded_alias | split row ' ' | take 1)
+    } else {
+        $spans
+    }
+
+    match $spans.0 {
+        nu => $fish_completer
+        git => $fish_completer
+        kubectl => $fish_completer
+        helm => $fish_completer
+        _ => $carapace_completer
+    } | do $in $spans
+}
+
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
   color_config: $catppuccin_theme  # <-- this is the theme
@@ -96,8 +131,7 @@ $env.config = {
     algorithm: "prefix"  # prefix or fuzzy
     external: {
       enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
-      max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-      completer: null # check 'carapace_completer' above as an example
+      completer: $external_completer
     }
   }
   filesize: {
@@ -111,9 +145,8 @@ $env.config = {
   use_grid_icons: true
   footer_mode: "25" # always, never, number_of_rows, auto
   float_precision: 2 # the precision for displaying floats in tables
-  # buffer_editor: "emacs" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
   bracketed_paste: true # enable bracketed paste, currently useless on windows
   edit_mode: emacs # emacs, vi
-  shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
+  # shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
   render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
 }

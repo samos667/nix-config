@@ -53,7 +53,6 @@
       delve # go debugger
 
       # -- java
-      jdk17
       gradle
       maven
       spring-boot-cli

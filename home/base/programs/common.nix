@@ -41,6 +41,7 @@
     wezterm
     openjdk17-bootstrap
     screen
+    fish
 
     # nix related
     #
@@ -67,6 +68,12 @@
           User git
           Port 22
           IdentityFile /home/sam/.ssh/id_ed25519-github
+      Host 172.16.66.200
+          Hostname 172.16.66.200
+          User sam
+          Port 22
+          IdentityFile /home/sam/.ssh/id_ed25519-workstation
+
     '';
   };
 }

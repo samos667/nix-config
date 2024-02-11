@@ -13,6 +13,10 @@
     # misc
     cowsay
     bitwarden-cli
+    kubectl
+    k9s
+    kubernetes-helm
+    cilium-cli
 
     # productivity
     hugo # static site generator
