@@ -26,15 +26,13 @@
 
         modules = [
           ./hosts/ctemplate
-	  home-manager.nixosModules.home-manager
-	  {
-	    home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
-
-	    home-manager.extraSpecialArgs = inputs;
-	    home-manager.users.sam = import ./home/ctemplate/home.nix;
-
-	  }
+	        home-manager.nixosModules.home-manager
+	        {
+	          home-manager.useGlobalPkgs = true;
+	          home-manager.useUserPackages = true;
+	          home-manager.extraSpecialArgs = inputs;
+	          home-manager.users.sam = import ./home/ctemplate/home.nix;
+	        }
         ];
       };
       "workstation" = nixpkgs.lib.nixosSystem {
@@ -42,15 +40,13 @@
 
         modules = [
           ./hosts/workstation
-	  home-manager.nixosModules.home-manager
-	  {
-	    home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
-
-	    home-manager.extraSpecialArgs = inputs;
-	    home-manager.users.sam = import ./home/workstation/home.nix;
-
-	  }
+	        home-manager.nixosModules.home-manager
+	        {
+	          home-manager.useGlobalPkgs = true;
+	          home-manager.useUserPackages = true;
+	          home-manager.extraSpecialArgs = inputs;
+	          home-manager.users.sam = import ./home/workstation/home.nix;
+	        }
         ];
       };
     };

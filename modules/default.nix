@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{  pkgs, ... }:
 
 {
 
@@ -7,7 +7,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sam = {
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
     isNormalUser = true;
     openssh.authorizedKeys.keys  = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAJzb59KOgc9ldoJgsvH7eiE5BkIQQN059Cst0QYlFRN sam@workstation.k8s-ekip.cc" ];
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
@@ -33,7 +33,6 @@
   #   enableSSHSupport = true;
   # };
 
-  programs.fish.enable = true;
   
   virtualisation.docker.enable = true;
   users.extraGroups.docker.members = [ "sam" ];

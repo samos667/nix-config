@@ -105,6 +105,7 @@
       fzf
       pandoc # document converter
       hugo # static site generator
+      codeium
 
       #-- Optional Requirements:
       gdu # disk usage analyzer, required by AstroNvim
