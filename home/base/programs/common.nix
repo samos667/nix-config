@@ -39,6 +39,7 @@
     fd
     bat
     wezterm
+    adoptopenjdk-jre-bin
 
     # nix related
     #
