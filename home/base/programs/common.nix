@@ -40,6 +40,7 @@
     bat
     wezterm
     openjdk17-bootstrap
+    screen
 
     # nix related
     #
