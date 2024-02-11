@@ -44,6 +44,12 @@
     starship = {
       enable = true;
       settings = {
+        memory_usage = {
+          disabled = false;
+          threshold = -1;
+          symbol = " ";
+          style = "bold dimmed green";
+        };
         hostname = {
           ssh_only = false;
           format = "[$ssh_symbol](bold blue) on [$hostname](bold red) ";
