@@ -1,7 +1,7 @@
 {config, ...}: {
 
   imports = [
-    ./nushell.nix
+    ./fish.nix
   ];
 
 #  home.shellAliases = {

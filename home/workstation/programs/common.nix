@@ -17,6 +17,9 @@
     k9s
     kubernetes-helm
     cilium-cli
+    kubecolor
+    sops
+    age
 
     # productivity
     hugo # static site generator

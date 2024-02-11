@@ -41,7 +41,6 @@
     wezterm
     openjdk17-bootstrap
     screen
-    fish
 
     # nix related
     #
