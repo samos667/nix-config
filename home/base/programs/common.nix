@@ -39,7 +39,7 @@
     fd
     bat
     wezterm
-    adoptopenjdk-jre-bin
+    openjdk17-bootstrap
 
     # nix related
     #
