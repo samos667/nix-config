@@ -3,7 +3,7 @@
 {
   imports =
     [
-      ../ctcore/default.nix
+      ../vmcore/default.nix
       # ./k3s.nix
     ];
 }

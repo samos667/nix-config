@@ -59,7 +59,7 @@
 	          home-manager.useGlobalPkgs = true;
 	          home-manager.useUserPackages = true;
 	          home-manager.extraSpecialArgs = inputs;
-	          home-manager.users.sam = import ./home/ctemplate/home.nix;
+	          home-manager.users.sam = import ./home/k3s/home.nix;
 	        }
         ];
 

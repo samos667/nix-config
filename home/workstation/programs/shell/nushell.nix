@@ -11,8 +11,6 @@
         dc = "docker compose";
       };
     };
-    carapace.enable = true;
-    carapace.enableNushellIntegration = true;
 
     starship = {
       enable = true;
