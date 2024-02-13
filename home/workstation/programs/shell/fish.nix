@@ -1,9 +1,17 @@
-{ pkgs, ... }:
-
-{
-  
+{pkgs, ...}: {
   programs.fish = {
     enable = true;
+    interactiveShellInit = ''
+      set fish_greeting # Disable greeting
+      if status is-interactive
+        function kubectl
+          kubecolor $argv
+        end
+        alias v="nvim"
+        alias k="kubectl"
+      end
+      alias python="python3"
+    '';
     plugins = [
       {
         name = "fzf";
