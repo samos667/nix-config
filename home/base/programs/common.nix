@@ -6,6 +6,13 @@
     # archives
     zip
     unzip
+
+    # with more details log output
+    nix-output-monitor
+
+    btop  # replacement of htop/nmon
+    iotop # io monitoring
+    iftop # network monitoring
   ];
 
   # basic configuration of git

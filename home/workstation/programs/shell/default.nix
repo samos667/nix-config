@@ -2,7 +2,7 @@
 
   imports = [
     ./fish.nix
-    ./nushell.nix
+    # ./nushell.nix
   ];
 
 #  home.shellAliases = {
