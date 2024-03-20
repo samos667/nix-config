@@ -11,6 +11,8 @@
         alias k="kubectl"
       end
       alias python="python3"
+      zellij setup --generate-completion fish | source
+
     '';
     plugins = [
       {

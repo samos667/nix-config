@@ -11,21 +11,16 @@ return {
     skip_prompts = false,
     show_changelog = true,
     auto_quit = false,
-    -- remotes = { -- easily add new remotes to track
-    --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
-    --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
-    --   ["remote3"] = "github_user", -- GitHub user assumes user/AstroNvim.git
-    -- },
-},
+  },
 
   options = {
     opt = {
       relativenumber = true, -- Show relative numberline
-      signcolumn = "auto", -- Show sign column when used only
-      spell = false,      -- Spell checking
-      swapfile = false,   -- Swapfile
-      smartindent = false, -- fix https://github.com/ryan4yin/nix-config/issues/4
-      title = true,       -- Set the title of window to `filename [+=-] (path) - NVIM`
+      signcolumn = "auto",   -- Show sign column when used only
+      spell = false,         -- Spell checking
+      swapfile = false,
+      smartindent = false,   -- fix https://github.com/ryan4yin/nix-config/issues/4
+      title = true,          -- Set the title of window to `filename [+=-] (path) - NVIM`
       -- The percentage of 'columns' to use for the title
       -- When the title is longer, only the end of the path name is shown.
       titlelen = 20,
@@ -39,15 +34,9 @@ return {
     -- https://github.com/echasnovski/mini.ai
     { import = "astrocommunity.motion.mini-ai" },
     { import = "astrocommunity.motion.flash-nvim" },
-    -- diable toggleterm.nvim, zellij's terminal is far better than neovim's one
+    -- disable toggleterm.nvim, zellij's terminal is far better than neovim's one
     { "akinsho/toggleterm.nvim",                                   enabled = false },
     { "folke/flash.nvim",                                          vscode = false },
-    -- Highly experimental plugin that completely replaces
-    -- the UI for messages, cmdline and the popupmenu.
-    -- { import = "astrocommunity.utility.noice-nvim" },
-    -- Fully featured & enhanced replacement for copilot.vim
-    -- <Tab> work with both auto completion in cmp and copilot
-    { import = "astrocommunity.media.vim-wakatime" },
     { import = "astrocommunity.motion.leap-nvim" },
     { import = "astrocommunity.motion.flit-nvim" },
     { import = "astrocommunity.scrolling.nvim-scrollbar" },
@@ -87,7 +76,7 @@ return {
       "catppuccin/nvim",
       name = "catppuccin",
       opts = function(_, opts)
-        opts.flavour = "mocha"              -- latte, frappe, macchiato, mocha
+        opts.flavour = "mocha"             -- latte, frappe, macchiato, mocha
         opts.transparent_background = true -- setting the background color.
       end,
     },
@@ -95,14 +84,14 @@ return {
     {
       "nvim-treesitter/nvim-treesitter",
       opts = function(_, opts)
-        local utils = require("astronvim.utils")
+        local utils = require "astronvim.utils"
         opts.incremental_selection = {
           enable = true,
           keymaps = {
-            init_selection = "<C-space>", -- Ctrl + Space
+            init_selection = "<C-space>",    -- Ctrl + Space
             node_incremental = "<C-space>",
             scope_incremental = "<A-space>", -- Alt + Space
-            node_decremental = "<bs>", -- Backspace
+            node_decremental = "<bs>",       -- Backspace
           },
         }
         opts.ignore_install = { "gotmpl" }
@@ -135,8 +124,8 @@ return {
             url = "https://github.com/6cdh/tree-sitter-scheme", -- local path or git repo
             files = { "src/parser.c" },
             -- optional entries:
-            branch = "main",                  -- default branch in case of git repo if different from master
-            generate_requires_npm = false,    -- if stand-alone parser without npm dependencies
+            branch = "main",                        -- default branch in case of git repo if different from master
+            generate_requires_npm = false,          -- if stand-alone parser without npm dependencies
             requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
           },
         }
@@ -160,24 +149,37 @@ return {
         require("orgmode").setup_ts_grammar()
 
         -- Setup treesitter
-        require("nvim-treesitter.configs").setup({
+        require("nvim-treesitter.configs").setup {
           highlight = {
             enable = true,
             additional_vim_regex_highlighting = { "org" },
           },
           ensure_installed = { "org" },
-        })
+        }
 
         -- Setup orgmode
-        require("orgmode").setup({
+        require("orgmode").setup {
           org_agenda_files = "~/org/**/*",
           org_default_notes_file = "~/org/refile.org",
-        })
+        }
       end,
     },
 
     -- Lua implementation of CamelCaseMotion, with extra consideration of punctuation.
     { import = "astrocommunity.motion.nvim-spider" },
+    {
+      "aaronhallaert/advanced-git-search.nvim",
+      dependencies = {
+        "nvim-telescope/telescope.nvim",
+        -- to show diff splits and open commits in browser
+        "tpope/vim-fugitive",
+        -- to open commits in browser with fugitive
+        "tpope/vim-rhubarb",
+        -- optional: to replace the diff from fugitive with diffview.nvim
+        -- (fugitive is still needed to open in browser)
+        "sindrets/diffview.nvim",
+      },
+    },
     -- AI Assistant
     -- {
     --   "Exafunction/codeium.nvim",
@@ -233,8 +235,6 @@ return {
     --   end,
     -- },
 
-
-
     {
       "0x00-ketsu/autosave.nvim",
       -- lazy-loading on events
@@ -248,20 +248,14 @@ return {
     {
       "0x00-ketsu/markdown-preview.nvim",
       ft = { "md", "markdown", "mkd", "mkdn", "mdwn", "mdown", "mdtxt", "mdtext", "rmd", "wiki" },
-      config = function()
-        require("markdown-preview").setup({
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the setup section below
-        })
-      end,
+      config = function() require("markdown-preview").setup {} end,
     },
 
     -- clipboard manager
     {
       "gbprod/yanky.nvim",
       opts = function()
-        local mapping = require("yanky.telescope.mapping")
+        local mapping = require "yanky.telescope.mapping"
         local mappings = mapping.get_defaults()
         mappings.i["<c-p>"] = nil
         return {
@@ -340,8 +334,8 @@ return {
       keys = { "<space>m", "<space>j", "<space>s" },
       dependencies = { "nvim-treesitter/nvim-treesitter" },
       config = function()
-        require("treesj").setup({ --[[ your config ]]
-        })
+        require("treesj").setup { --[[ your config ]]
+        }
       end,
     },
 
@@ -375,15 +369,13 @@ return {
     },
 
     -- full signature help, docs and completion for the nvim lua API.
-    { "folke/neodev.nvim",     opts = {} },
+    { "folke/neodev.nvim",                         opts = {} },
     -- automatically highlighting other uses of the word under the cursor using either LSP, Tree-sitter, or regex matching.
-    { "RRethy/vim-illuminate", config = function() end },
+    { "RRethy/vim-illuminate",                     config = function() end },
     -- implementation/definition preview
     {
       "rmagatti/goto-preview",
-      config = function()
-        require("goto-preview").setup({})
-      end,
+      config = function() require("goto-preview").setup {} end,
     },
 
     -- Undo tree
@@ -425,31 +417,31 @@ return {
       "lewis6991/gitsigns.nvim",
       event = { "CursorHold", "CursorHoldI" },
       init = function()
-        require('gitsigns').setup({
+        require("gitsigns").setup {
           current_line_blame = true,
-        })
+        }
       end,
     },
 
     {
       "ibhagwan/smartyank.nvim",
       init = function()
-        require('smartyank').setup({
+        require("smartyank").setup {
           osc52 = {
             enabled = true,
-            ssh_only = false,        -- false to OSC52 yank also in local sessions
-            silent = false,         -- true to disable the "n chars copied" echo
+            ssh_only = false, -- false to OSC52 yank also in local sessions
+            silent = false,   -- true to disable the "n chars copied" echo
           },
           clipboard = {
             enabled = true,
           },
-        })
+        }
       end,
     },
     {
       "jose-elias-alvarez/null-ls.nvim",
       opts = function(_, opts)
-        local null_ls = require("null-ls")
+        local null_ls = require "null-ls"
         local code_actions = null_ls.builtins.code_actions
         local diagnostics = null_ls.builtins.diagnostics
         local formatting = null_ls.builtins.formatting
@@ -463,35 +455,35 @@ return {
             -- common refactoring actions based off the Refactoring book by Martin Fowler
             code_actions.refactoring,
             code_actions.gomodifytags, -- Go - modify struct field tags
-            code_actions.impl,   -- Go - generate interface method stubs
+            code_actions.impl,         -- Go - generate interface method stubs
             code_actions.shellcheck,
-            code_actions.proselint, -- English prose linter
-            code_actions.statix, -- Lints and suggestions for Nix.
+            code_actions.proselint,    -- English prose linter
+            code_actions.statix,       -- Lints and suggestions for Nix.
 
             -- Diagnostic
             diagnostics.actionlint, -- GitHub Actions workflow syntax checking
-            diagnostics.buf,  -- check text in current buffer
-            diagnostics.checkmake, -- check Makefiles
-            diagnostics.deadnix, -- Scan Nix files for dead code.
+            diagnostics.buf,        -- check text in current buffer
+            diagnostics.checkmake,  -- check Makefiles
+            diagnostics.deadnix,    -- Scan Nix files for dead code.
 
             -- Formatting
-            formatting.prettier,                 -- js/ts/vue/css/html/json/... formatter
-            diagnostics.hadolint,                -- Dockerfile linter
-            formatting.black,                    -- Python formatter
-            formatting.ruff,                     -- extremely fast Python linter
-            formatting.goimports,                -- Go formatter
-            formatting.shfmt,                    -- Shell formatter
-            formatting.rustfmt,                  -- Rust formatter
-            formatting.taplo,                    -- TOML formatteautoindentr
-            formatting.terraform_fmt,            -- Terraform formatter
-            formatting.stylua,                   -- Lua formatter
-            formatting.alejandra,                -- Nix formatter
-            formatting.sqlfluff.with({           -- SQL formatter
+            formatting.prettier,                        -- js/ts/vue/css/html/json/... formatter
+            diagnostics.hadolint,                       -- Dockerfile linter
+            formatting.black,                           -- Python formatter
+            formatting.ruff,                            -- extremely fast Python linter
+            formatting.goimports,                       -- Go formatter
+            formatting.shfmt,                           -- Shell formatter
+            formatting.rustfmt,                         -- Rust formatter
+            formatting.taplo,                           -- TOML formatteautoindentr
+            formatting.terraform_fmt,                   -- Terraform formatter
+            formatting.stylua,                          -- Lua formatter
+            formatting.alejandra,                       -- Nix formatter
+            formatting.sqlfluff.with {                  -- SQL formatter
               extra_args = { "--dialect", "postgres" }, -- change to your dialect
-            }),
-            formatting.nginx_beautifier,         -- Nginx formatter
-            formatting.verible_verilog_format,   -- Verilog formatter
-            formatting.emacs_scheme_mode,        -- using emacs in batch mode to format scheme files.
+            },
+            formatting.nginx_beautifier,                -- Nginx formatter
+            formatting.verible_verilog_format,          -- Verilog formatter
+            formatting.emacs_scheme_mode,               -- using emacs in batch mode to format scheme files.
           })
         end
       end,
@@ -504,24 +496,20 @@ return {
       init = function()
         -- 1. Disable highlighting for certain filetypes
         -- 2. Ignore files larger than a certain filesize
-        local previewers = require("telescope.previewers")
+        local previewers = require "telescope.previewers"
 
         local _bad = { ".*%.csv", ".*%.min.js" } -- Put all filetypes that slow you down in this array
-        local filesize_threshold = 300 * 1024 -- 300KB
+        local filesize_threshold = 300 * 1024    -- 300KB
         local bad_files = function(filepath)
           for _, v in ipairs(_bad) do
-            if filepath:match(v) then
-              return false
-            end
+            if filepath:match(v) then return false end
           end
           return true
         end
 
         local new_maker = function(filepath, bufnr, opts)
           opts = opts or {}
-          if opts.use_ft_detect == nil then
-            opts.use_ft_detect = true
-          end
+          if opts.use_ft_detect == nil then opts.use_ft_detect = true end
 
           -- 1. Check if the file is in the bad_files array, and if so, don't highlight it
           opts.use_ft_detect = opts.use_ft_detect == false and false or bad_files(filepath)
@@ -529,9 +517,7 @@ return {
           -- 2. Check the file size, and ignore it if it's too big(preview nothing).
           filepath = vim.fn.expand(filepath)
           vim.loop.fs_stat(filepath, function(_, stat)
-            if not stat then
-              return
-            end
+            if not stat then return end
             if stat.size > filesize_threshold then
               return
             else
@@ -540,11 +526,17 @@ return {
           end)
         end
 
-        require("telescope").setup({
+        require("telescope").setup {
           defaults = {
             buffer_previewer_maker = new_maker,
           },
-        })
+          extensions = {
+            advanced_git_search = {
+              diff_plugin = "diffview",
+            },
+          },
+        }
+        require("telescope").load_extension("advanced_git_search")
       end,
     },
   },
@@ -578,34 +570,34 @@ return {
     -- enable servers that installed by home-manager instead of mason
     servers = {
       ---- Frontend & NodeJS
-      "tsserver",       -- typescript/javascript language server
-      "tailwindcss",    -- tailwindcss language server
-      "html",           -- html language server
-      "cssls",          -- css language server
-      "prismals",       -- prisma language server
-      "volar",          -- vue language server
+      "tsserver",          -- typescript/javascript language server
+      "tailwindcss",       -- tailwindcss language server
+      "html",              -- html language server
+      "cssls",             -- css language server
+      "prismals",          -- prisma language server
+      "volar",             -- vue language server
       ---- Configuration Language
-      "marksman",       -- markdown ls
-      "jsonls",         -- json language server
-      "yamlls",         -- yaml language server
-      "taplo",          -- toml language server
+      "marksman",          -- markdown ls
+      "jsonls",            -- json language server
+      "yamlls",            -- yaml language server
+      "taplo",             -- toml language server
       ---- Backend
-      "lua_ls",         -- lua
-      "gopls",          -- go
-      "rust_analyzer",  -- rust
-      "pyright",        -- python
-      "ruff_lsp",       -- extremely fast Python linter and code transformation
-      "jdtls",          -- java
-      "nil_ls",         -- nix language server
+      "lua_ls",            -- lua
+      "gopls",             -- go
+      "rust_analyzer",     -- rust
+      "pyright",           -- python
+      "ruff_lsp",          -- extremely fast Python linter and code transformation
+      "jdtls",             -- java
+      "nil_ls",            -- nix language server
       ---- HDL
-      "verible",        -- verilog language server
+      "verible",           -- verilog language server
       ---- Operation & Cloud Nativautoindente
-      "bashls",         -- bash
-      "cmake",          -- cmake language server
-      "clangd",         -- c/c++
-      "dockerls",       -- dockerfile
-      "jsonnet_ls",     -- jsonnet language server
-      "terraformls",    -- terraform hcl
+      "bashls",            -- bash
+      "cmake",             -- cmake language server
+      "clangd",            -- c/c++
+      "dockerls",          -- dockerfile
+      "jsonnet_ls",        -- jsonnet language server
+      "terraformls",       -- terraform hcl
       "scheme_langserver", -- scheme language server
     },
     formatting = {
