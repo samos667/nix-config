@@ -4,6 +4,6 @@
   imports =
     [
       ../vmcore/default.nix
-      # ./k3s.nix
+      ./k3s.nix
     ];
 }
