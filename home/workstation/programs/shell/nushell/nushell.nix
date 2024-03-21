@@ -1,16 +1,25 @@
-{pkgs, ...}: {
+
+
+{ ...}:
+let
+  shellAliases = {
+    k = "kubectl";
+    v = "nvim";
+  };
+in {
+  
+  # only works in bash/zsh, not nushell
+  home.shellAliases = shellAliases;
+
   programs = {
     nushell = {
       enable = true;
       configFile.source = ./config.nu;
-      shellAliases = {
-        h = "helm";
-        k = "kubectl";
-        v = "nvim";
-        d = "docker";
-        dc = "docker compose";
-      };
+      inherit shellAliases;
     };
+
+    carapace.enable = true;
+    carapace.enableNushellIntegration = true;
 
     starship = {
       enable = true;
@@ -67,6 +76,13 @@
           error_symbol = "[➜](bold red)";
         };
       };
+    };
+    bash = {
+      enable = true;
+      enableCompletion = true;
+      bashrcExtra = ''
+        export PATH="$HOME/.local/bin"
+      '';
     };
   };
 }

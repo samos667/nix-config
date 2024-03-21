@@ -70,14 +70,10 @@ let catppuccin_theme = {
     shape_custom: {attr: b}
 }
 
-let fish_completer = {|spans|
-    fish --command $'complete "--do-complete=($spans | str join " ")"'
-    | $"value(char tab)description(char newline)" + $in
-    | from tsv --flexible --no-infer
+let carapace_completer = {|spans|
+  carapace $spans.0 nushell $spans | from json
 }
 
-
-# This completer will use carapace by default
 let external_completer = {|spans|
     let expanded_alias = scope aliases
     | where name == $spans.0
@@ -92,10 +88,10 @@ let external_completer = {|spans|
     }
 
     match $spans.0 {
-        _ => $fish_completer
+        _ => $carapace_completer
     } | do $in $spans
 }
-
+$env.PATH = ($env.PATH | split row (char esep) | append '/etc/profiles/per-user/sam/bin')
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
   color_config: $catppuccin_theme  # <-- this is the theme
@@ -122,6 +118,7 @@ $env.config = {
     algorithm: "prefix"  # prefix or fuzzy
     external: {
       enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
+      max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
       completer: $external_completer
     }
   }
@@ -133,11 +130,9 @@ $env.config = {
     vi_insert: block # block, underscore, line , blink_block, blink_underscore, blink_line (block is the default)
     vi_normal: underscore # block, underscore, line, blink_block, blink_underscore, blink_line (underscore is the default)
   }
-  use_grid_icons: true
-  footer_mode: "25" # always, never, number_of_rows, auto
   float_precision: 2 # the precision for displaying floats in tables
-  bracketed_paste: true # enable bracketed paste, currently useless on windows
-  edit_mode: emacs # emacs, vi
-  # shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
+  # bracketed_paste: true # enable bracketed paste, currently useless on windows
+  edit_mode: vi # emacs, vi
+  shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
   render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
 }
