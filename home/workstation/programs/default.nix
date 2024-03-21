@@ -1,7 +1,7 @@
 {
   imports = [
     ./common.nix
-    ./shell
+    ./shell/fish
     ./editor
   ];
 }
