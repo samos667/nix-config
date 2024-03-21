@@ -1,10 +1,7 @@
-{ pkgs, modulesPath, ... }:
-
 {
-  imports =
-    [
-      ../../modules/default.nix
+  imports = [
+    ../../modules/default.nix
 
-      ./hardware-config.nix
-    ];
+    ./hardware-config.nix
+  ];
 }

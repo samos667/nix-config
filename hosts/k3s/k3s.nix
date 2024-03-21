@@ -1,7 +1,4 @@
-{ pkgs, ... }:
-
-{
-
+{pkgs, ...}: {
   networking.firewall.allowedTCPPorts = [
     22
     80
@@ -18,5 +15,5 @@
   services.k3s.extraFlags = toString [
     "--flannel-backend none --disable-network-policy --disable=traefik --disable=local-storage --cluster-cidr=10.66.0.0/16 --service-cidr=10.67.0.0/16 --disable=servicelb --disable-kube-proxy"
   ];
-  environment.systemPackages = [ pkgs.k3s ];
+  environment.systemPackages = [pkgs.k3s];
 }

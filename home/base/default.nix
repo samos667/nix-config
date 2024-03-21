@@ -1,7 +1,4 @@
-{ config, pkgs, ... }:
-
 {
-
   imports = [
     ./programs
   ];

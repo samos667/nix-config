@@ -1,13 +1,9 @@
-
-
-{ ...}:
-let
+{...}: let
   shellAliases = {
     k = "kubectl";
     v = "nvim";
   };
 in {
-  
   # only works in bash/zsh, not nushell
   home.shellAliases = shellAliases;
 

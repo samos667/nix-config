@@ -1,9 +1,6 @@
-{ ... }:
-
-{
-  imports =
-    [
-      ../vmcore/default.nix
-      ./k3s.nix
-    ];
+{...}: {
+  imports = [
+    ../vmcore/default.nix
+    ./k3s.nix
+  ];
 }

@@ -1,5 +1,4 @@
-{config, ...}: {
-
+{
   imports = [
     # ./fish.nix
   ];

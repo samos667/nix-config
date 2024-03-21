@@ -1,8 +1,5 @@
-{ ... }:
-
-{
-  imports =
-    [
-      ../ctcore/default.nix
-    ];
+{...}: {
+  imports = [
+    ../ctcore/default.nix
+  ];
 }

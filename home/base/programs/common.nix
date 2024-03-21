@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     # archives
@@ -10,7 +8,7 @@
     # with more details log output
     nix-output-monitor
 
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
   ];

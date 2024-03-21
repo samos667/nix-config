@@ -14,25 +14,23 @@
   };
 
   outputs = inputs @ {
-    self,
     nixpkgs,
     home-manager,
     ...
   }: {
     nixosConfigurations = {
-
       "ctemplate" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         modules = [
           ./hosts/ctemplate
-	        home-manager.nixosModules.home-manager
-	        {
-	          home-manager.useGlobalPkgs = true;
-	          home-manager.useUserPackages = true;
-	          home-manager.extraSpecialArgs = inputs;
-	          home-manager.users.sam = import ./home/ctemplate/home.nix;
-	        }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = inputs;
+            home-manager.users.sam = import ./home/ctemplate/home.nix;
+          }
         ];
       };
       "workstation" = nixpkgs.lib.nixosSystem {
@@ -40,13 +38,13 @@
 
         modules = [
           ./hosts/workstation
-	        home-manager.nixosModules.home-manager
-	        {
-	          home-manager.useGlobalPkgs = true;
-	          home-manager.useUserPackages = true;
-	          home-manager.extraSpecialArgs = inputs;
-	          home-manager.users.sam = import ./home/workstation/home.nix;
-	        }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = inputs;
+            home-manager.users.sam = import ./home/workstation/home.nix;
+          }
         ];
       };
       "k3sm1" = nixpkgs.lib.nixosSystem {
@@ -54,30 +52,28 @@
 
         modules = [
           ./hosts/k3s
-	        home-manager.nixosModules.home-manager
-	        {
-	          home-manager.useGlobalPkgs = true;
-	          home-manager.useUserPackages = true;
-	          home-manager.extraSpecialArgs = inputs;
-	          home-manager.users.sam = import ./home/k3s/home.nix;
-	        }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = inputs;
+            home-manager.users.sam = import ./home/k3s/home.nix;
+          }
         ];
-
       };
       "mc" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         modules = [
           ./hosts/mc
-	        home-manager.nixosModules.home-manager
-	        {
-	          home-manager.useGlobalPkgs = true;
-	          home-manager.useUserPackages = true;
-	          home-manager.extraSpecialArgs = inputs;
-	          home-manager.users.sam = import ./home/ctemplate/home.nix;
-	        }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = inputs;
+            home-manager.users.sam = import ./home/ctemplate/home.nix;
+          }
         ];
-
       };
     };
   };
