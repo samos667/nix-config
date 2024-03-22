@@ -17,7 +17,6 @@
     (python311.withPackages (
       ps:
         with ps; [
-          ruff-lsp
           black # python formatter
 
           jupyter
@@ -82,17 +81,11 @@
     jsonnet-language-server
     hadolint # Dockerfile linter
 
-    # # -- Lisp like Languages
-    # guile
-    # racket-minimal
-    # fnlfmt # fennel
-
     #-- Others
     taplo # TOML language server / formatter / validator
     nodePackages.yaml-language-server
     sqlfluff # SQL linter
     actionlint # GitHub Actions linter
-    buf # protoc plugin for linting and formatting
     proselint # English prose linter
 
     #-- Misc
