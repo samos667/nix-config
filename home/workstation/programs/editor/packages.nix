@@ -1,16 +1,16 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    #-- c/c++
-    cmake
-    cmake-language-server
-    gnumake
-    checkmake
+    # #-- c/c++
+    # cmake
+    # cmake-language-server
+    # gnumake
+    # checkmake
     # c/c++ compiler, required by nvim-treesitter!
     gcc
-    # c/c++ tools with clang-tools, the unwrapped version won't
-    # add alias like `cc` and `c++`, so that it won't conflict with gcc
-    llvmPackages.clang-unwrapped
-    lldb
+    # # c/c++ tools with clang-tools, the unwrapped version won't
+    # # add alias like `cc` and `c++`, so that it won't conflict with gcc
+    # llvmPackages.clang-unwrapped
+    # lldb
 
     #-- python
     nodePackages.pyright # python language server
@@ -29,10 +29,10 @@
         ]
     ))
 
-    #-- rust
-    rust-analyzer
-    cargo # rust package manager
-    rustfmt
+    # #-- rust
+    # rust-analyzer
+    # cargo # rust package manager
+    # rustfmt
 
     #-- nix
     nil
@@ -42,19 +42,19 @@
     deadnix # Find and remove unused code in .nix source files
     alejandra # Nix Code Formatter
 
-    #-- golang
-    go
-    gomodifytags
-    iferr # generate error handling code for go
-    impl # generate function implementation for go
-    gotools # contains tools like: godoc, goimports, etc.
-    gopls # go language server
-    delve # go debugger
+    # #-- golang
+    # go
+    # gomodifytags
+    # iferr # generate error handling code for go
+    # impl # generate function implementation for go
+    # gotools # contains tools like: godoc, goimports, etc.
+    # gopls # go language server
+    # delve # go debugger
 
-    # -- java
-    gradle
-    maven
-    spring-boot-cli
+    # # -- java
+    # gradle
+    # maven
+    # spring-boot-cli
 
     #-- lua
     stylua
@@ -65,14 +65,14 @@
     shellcheck
     shfmt
 
-    #-- javascript/typescript --#
-    nodePackages.nodejs
-    nodePackages.typescript
-    nodePackages.typescript-language-server
-    # HTML/CSS/JSON/ESLint language servers extracted from vscode
-    nodePackages.vscode-langservers-extracted
-    nodePackages."@tailwindcss/language-server"
-    emmet-ls
+    # #-- javascript/typescript --#
+    # nodePackages.nodejs
+    # nodePackages.typescript
+    # nodePackages.typescript-language-server
+    # # HTML/CSS/JSON/ESLint language servers extracted from vscode
+    # nodePackages.vscode-langservers-extracted
+    # nodePackages."@tailwindcss/language-server"
+    # emmet-ls
 
     #-- CloudNative
     nodePackages.dockerfile-language-server-nodejs
@@ -82,10 +82,10 @@
     jsonnet-language-server
     hadolint # Dockerfile linter
 
-    # -- Lisp like Languages
-    guile
-    racket-minimal
-    fnlfmt # fennel
+    # # -- Lisp like Languages
+    # guile
+    # racket-minimal
+    # fnlfmt # fennel
 
     #-- Others
     taplo # TOML language server / formatter / validator
@@ -103,7 +103,6 @@
     fzf
     pandoc # document converter
     hugo # static site generator
-    codeium
 
     #-- Optional Requirements:
     gdu # disk usage analyzer, required by AstroNvim

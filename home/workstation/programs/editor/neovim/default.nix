@@ -2,18 +2,7 @@
   pkgs,
   astronvim,
   ...
-}:
-###############################################################################
-#
-#  AstroNvim's configuration and all its dependencies(lsp, formatter, etc.)
-#
-#e#############################################################################
-let
-  shellAliases = {
-    v = "nvim";
-    vdiff = "nvim -d";
-  };
-in {
+}: {
   xdg.configFile = {
     # astronvim's config
     "nvim" = {
@@ -26,10 +15,9 @@ in {
     "astronvim/lua/user" = {
       source = ./astronvim_user;
       force = true;
+      recursive = true;
     };
   };
-
-  home.shellAliases = shellAliases;
 
   programs = {
     neovim = {
