@@ -136,6 +136,8 @@ $env.config = {
   shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
   render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
 }
+
+# zellij functions
 def zrf [arg] {
   zellij run --name $arg --floating -- nu -c $arg
 }
@@ -146,5 +148,16 @@ def ze [arg] {
   zellij edit $arg
 }
 def zef [arg] {
-  command zellij edit --floating $arg
+  zellij edit --floating $arg
+}
+
+# git functions
+def gcm [arg] {
+  git commit -am $arg
+}
+def gcb [arg] {
+  git checkout -b $arg
+}
+def ggb [arg] {
+  git checkout $arg
 }

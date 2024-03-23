@@ -10,6 +10,8 @@
     # Git aliases
     wksp = "cd $'($env.HOME)/git/' ; ls";
     cdnix = "cd /etc/nixos";
+    gaa = "git add .";
+    gp = "git push";
  };
 in {
   # only works in bash/zsh, not nushell
