@@ -150,6 +150,9 @@ def ze [arg] {
 def zef [arg] {
   zellij edit --floating $arg
 }
+def z [arg] {
+  try { zellij a $arg } catch { zellij -s $arg }
+}
 
 # git functions
 def gcm [arg] {
@@ -163,7 +166,4 @@ def ggb [arg] {
 }
 def gacp [arg] {
   git add . ; git commit -am $arg ; git push
-}
-def z [arg] {
-  try { zellij a $arg } catch { zellij -s $arg }
 }
