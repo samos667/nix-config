@@ -59,6 +59,9 @@
     stylua
     lua-language-server
 
+    # HTML/CSS/JSON/ESLint language servers extracted from vscode
+    nodePackages.vscode-langservers-extracted
+
     #-- bash
     nodePackages.bash-language-server
     shellcheck

@@ -50,10 +50,10 @@ return {
       "jsonnet_ls",  -- jsonnet language server
       "terraformls", -- terraform hcl
     },
-    formatting = {
-      format_on_save = {
-        enabled = true,
-      },
-    },
+    -- formatting = {
+    --   format_on_save = {
+    --     enabled = true,
+    --   },
+    -- },
   },
 }

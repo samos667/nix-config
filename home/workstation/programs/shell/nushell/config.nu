@@ -136,3 +136,15 @@ $env.config = {
   shell_integration: true # enables terminal markers and a workaround to arrow keys stop working issue
   render_right_prompt_on_last_line: false # true or false to enable or disable right prompt to be rendered on last line of the prompt.
 }
+def zrf [arg] {
+  zellij run --name $arg --floating -- nu -c $arg
+}
+def zr [arg] {
+  zellij run --name $arg -- fish -c $arg
+}
+def ze [arg] {
+  zellij edit $arg
+}
+def zef [arg] {
+  command zellij edit --floating $arg
+}
