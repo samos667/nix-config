@@ -1,8 +1,16 @@
 {...}: let
   shellAliases = {
+    h = "helm";
     k = "kubectl";
     v = "nvim";
-  };
+    d = "docker";
+    dc = "docker compose";
+    nix-apply = "sudo nixos-rebuild switch";
+    nix-test = "sudo nixos-rebuild test";
+    # Git aliases
+    wksp = "cd $'($env.HOME)/git/' ; ls";
+    cdnix = "cd /etc/nixos";
+ };
 in {
   # only works in bash/zsh, not nushell
   home.shellAliases = shellAliases;
