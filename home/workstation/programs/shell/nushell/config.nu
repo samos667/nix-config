@@ -161,6 +161,9 @@ def gcb [arg] {
 def ggb [arg] {
   git checkout $arg
 }
+def gacp [arg] {
+  git add . ; git commit -am $arg ; git push
+}
 def z [arg] {
   try { zellij a $arg } catch { zellij -s $arg }
 }
