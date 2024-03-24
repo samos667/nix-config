@@ -10,7 +10,6 @@ in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-config.nix
-    ./../../home/masterace/gui/hyprland/values
   ];
 
   networking.hostName = hostname;
@@ -68,8 +67,6 @@ in {
   # conflict with feature: containerd-snapshotter
   # virtualisation.docker.storageDriver = "btrfs";
 
-  # for Nvidia GPU
-  services.xserver.videoDrivers = ["nvidia"]; # will install nvidia-vaapi-driver by default
   hardware.nvidia = {
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     # package = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -115,6 +112,8 @@ in {
   };
 
   services = {
+    # for Nvidia GPU
+    xserver.videoDrivers = ["nvidia"]; # will install nvidia-vaapi-driver by default
     xserver.enable = false; # disable xorg server
     # https://wiki.archlinux.org/title/Greetd
     greetd = {
