@@ -42,6 +42,11 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # my wallpapers
+    wallpapers = {
+      url = "github:ryan4yin/wallpapers";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {
