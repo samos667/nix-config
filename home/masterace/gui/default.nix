@@ -6,5 +6,6 @@
     ./hyprland.nix
     anyrun.homeManagerModules.default
     ./anyrun.nix
+    ./wayland-apps.nix
   ];
 }
