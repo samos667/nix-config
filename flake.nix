@@ -47,6 +47,7 @@
   outputs = inputs @ {
     nixpkgs,
     home-manager,
+    hyprland,
     ...
   }: {
     nixosConfigurations = {
@@ -118,9 +119,10 @@
             home-manager.extraSpecialArgs = inputs;
             home-manager.users.sam = import ./home/masterace/home.nix;
           }
+          hyprland.nixosModules.default
+          {programs.hyprland.enable = true;}
         ];
       };
-
     };
   };
 }
