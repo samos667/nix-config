@@ -1,7 +1,8 @@
 {
   imports = [
+    ./packages.nix
     ./hyprland.nix
-    # ./anyrun
-    # ./waybar
+    ./waybar.nix
+    ./anyrun.nix
   ];
 }

@@ -3,6 +3,6 @@
   imports = [
     ../base
     ../workstation/programs
-    ./gui/hyprland/default.nix
+    ./gui/default.nix
   ];
 }
