@@ -110,13 +110,13 @@ in {
     printing.enable = true; # Enable CUPS to print documents.
     keyd = {
       enable = true;
-      keyboards.default.settings = {
-        main = {
-          # overloads the capslock key to function as both escape (when tapped) and control (when held)
-          capslock = "overload(control, esc)";
-          esc = "capslock";
-        };
-      };
+      # keyboards.default.settings = {
+      #   main = {
+      #     # overloads the capslock key to function as both escape (when tapped) and control (when held)
+      #     capslock = "overload(control, esc)";
+      #     esc = "capslock";
+      #   };
+      # };
     };
   };
 

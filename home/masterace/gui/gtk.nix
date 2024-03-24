@@ -31,7 +31,7 @@
     enable = true;
 
     font = {
-      name = "Noto Sans";
+      name = "Firacode Nerd Font";
       package = pkgs.noto-fonts;
       size = 11;
     };

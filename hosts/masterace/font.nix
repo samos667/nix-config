@@ -1,247 +1,72 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs; [
-    twemoji-color-font
-  ];
+  # all fonts are linked to /nix/var/nix/profiles/system/sw/share/X11/fonts
   fonts = {
-    fonts = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      nerdfonts
-      twemoji-color-font
-      fira-code
-      fira-code-symbols
+    # use fonts specified by user rather than default ones
+    enableDefaultPackages = false;
+    fontDir.enable = true;
+
+    packages = with pkgs; [
+      # icon fonts
+      material-design-icons
+      font-awesome
+
+      # # Noto 系列字体是 Google 主导的，名字的含义是「没有豆腐」（no tofu），因为缺字时显示的方框或者方框被叫作 tofu
+      # # Noto 系列字族名只支持英文，命名规则是 Noto + Sans 或 Serif + 文字名称。
+      # # 其中汉字部分叫 Noto Sans/Serif CJK SC/TC/HK/JP/KR，最后一个词是地区变种。
+      # # noto-fonts # 大部分文字的常见样式，不包含汉字
+      # # noto-fonts-cjk # 汉字部分
+      # noto-fonts-emoji # 彩色的表情符号字体
+      # # noto-fonts-extra # 提供额外的字重和宽度变种
+      #
+      # # 思源系列字体是 Adobe 主导的。其中汉字部分被称为「思源黑体」和「思源宋体」，是由 Adobe + Google 共同开发的
+      # source-sans # 无衬线字体，不含汉字。字族名叫 Source Sans 3 和 Source Sans Pro，以及带字重的变体，加上 Source Sans 3 VF
+      # source-serif # 衬线字体，不含汉字。字族名叫 Source Code Pro，以及带字重的变体
+      # source-han-sans # 思源黑体
+      # source-han-serif # 思源宋体
+
+      # nerdfonts
+      # https://github.com/NixOS/nixpkgs/blob/nixos-23.11/pkgs/data/fonts/nerdfonts/shas.nix
+      (nerdfonts.override {
+        fonts = [
+          # symbols icon only
+          "NerdFontsSymbolsOnly"
+          # Characters
+          "FiraCode"
+          "JetBrainsMono"
+          "Iosevka"
+        ];
+      })
+      julia-mono
+      dejavu_fonts
     ];
-    fontconfig = {
-      localConf = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-        <fontconfig>
-          <!-- Default system-ui fonts -->
-          <match target="pattern">
-            <test name="family">
-              <string>system-ui</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>sans-serif</string>
-            </edit>
-          </match>
 
-          <!-- Default sans-serif fonts-->
-          <match target="pattern">
-            <test name="family">
-              <string>sans-serif</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>Noto Sans CJK SC</string>
-              <string>Noto Sans</string>
-              <string>Twemoji</string>
-            </edit>
-          </match>
-
-          <!-- Default serif fonts-->
-          <match target="pattern">
-            <test name="family">
-              <string>serif</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>Noto Serif CJK SC</string>
-              <string>Noto Serif</string>
-              <string>Twemoji</string>
-            </edit>
-          </match>
-
-          <!-- Default monospace fonts-->
-          <match target="pattern">
-            <test name="family">
-              <string>monospace</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>Noto Sans Mono CJK SC</string>
-              <string>Symbols Nerd Font</string>
-              <string>Twemoji</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>zh-HK</string>
-            </test>
-            <test name="family">
-              <string>Noto Sans CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Sans CJK HK</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>zh-HK</string>
-            </test>
-            <test name="family">
-              <string>Noto Serif CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <!-- not have HK -->
-              <string>Noto Serif CJK TC</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>zh-HK</string>
-            </test>
-            <test name="family">
-              <string>Noto Sans Mono CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Sans Mono CJK HK</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>zh-TW</string>
-            </test>
-            <test name="family">
-              <string>Noto Sans CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Sans CJK TC</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>zh-TW</string>
-            </test>
-            <test name="family">
-              <string>Noto Serif CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Serif CJK TC</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>zh-TW</string>
-            </test>
-            <test name="family">
-              <string>Noto Sans Mono CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Sans Mono CJK TC</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>ja</string>
-            </test>
-            <test name="family">
-              <string>Noto Sans CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Sans CJK JP</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-                <string>ja</string>
-            </test>
-            <test name="family">
-              <string>Noto Serif CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Serif CJK JP</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>ja</string>
-            </test>
-            <test name="family">
-              <string>Noto Sans Mono CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Sans Mono CJK JP</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>ko</string>
-            </test>
-            <test name="family">
-              <string>Noto Sans CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Sans CJK KR</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>ko</string>
-            </test>
-            <test name="family">
-              <string>Noto Serif CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Serif CJK KR</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang">
-              <string>ko</string>
-            </test>
-            <test name="family">
-              <string>Noto Sans Mono CJK SC</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Noto Sans Mono CJK KR</string>
-            </edit>
-          </match>
-
-          <!-- Replace monospace fonts -->
-          <match target="pattern">
-            <test name="family" compare="contains">
-              <string>Source Code</string>
-            </test>
-            <edit name="family" binding="strong">
-              <string>Iosevka Term</string>
-            </edit>
-          </match>
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>en</string>
-            </test>
-            <test name="family" compare="contains">
-              <string>Noto Sans CJK</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>Noto Sans</string>
-            </edit>
-          </match>
-
-          <match target="pattern">
-            <test name="lang" compare="contains">
-              <string>en</string>
-            </test>
-            <test name="family" compare="contains">
-              <string>Noto Serif CJK</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-              <string>Noto Serif</string>
-            </edit>
-          </match>
-        </fontconfig>
-      '';
+    # user defined fonts
+    # the reason there's Noto Color Emoji everywhere is to override DejaVu's
+    # B&W emojis that would sometimes show instead of some Color emojis
+    fontconfig.defaultFonts = {
+      serif = ["FiraCode Nerd Font"];
+      sansSerif = ["FiraCode Nerd Font"];
+      monospace = ["FiraCode Nerd Font"];
+      emoji = ["FiraCode Nerd Font"];
     };
+  };
+
+  # https://wiki.archlinux.org/title/KMSCON
+  services.kmscon = {
+    # Use kmscon as the virtual console instead of gettys.
+    # kmscon is a kms/dri-based userspace virtual terminal implementation.
+    # It supports a richer feature set than the standard linux console VT,
+    # including full unicode support, and when the video card supports drm should be much faster.
+    enable = true;
+    fonts = [
+      {
+        name = "Source Code Pro";
+        package = pkgs.source-code-pro;
+      }
+    ];
+    extraOptions = "--term xterm-256color";
+    extraConfig = "font-size=12";
+    # Whether to use 3D hardware acceleration to render the console.
+    hwRender = true;
   };
 }
