@@ -1,3 +1,4 @@
+{config, ...}:
 {
   imports = [
     ./programs
@@ -8,6 +9,7 @@
   home = {
     username = "sam";
     homeDirectory = "/home/sam";
+    home.homeDirectory = "/home/${config.home.username}";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage

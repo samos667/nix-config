@@ -13,7 +13,7 @@ in {
   ];
 
   networking.hostName = hostname;
-  networking.computerName = hostname;
+  # networking.computerName = hostname;
 
   # Set your time zone.
   time.timeZone = "Europe/Paris";
