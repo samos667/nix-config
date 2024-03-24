@@ -12,6 +12,13 @@
     xdg-user-dirs
   ];
 
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+    ];
+  };
   xdg.configFile."mimeapps.list".force = true;
   xdg = {
     enable = true;
