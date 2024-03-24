@@ -15,7 +15,7 @@
  };
 in {
   # only works in bash/zsh, not nushell
-  home.shellAliases = shellAliases;
+  # home.shellAliases = shellAliases;
 
   programs = {
     nushell = {
@@ -86,9 +86,9 @@ in {
     bash = {
       enable = true;
       enableCompletion = true;
-      bashrcExtra = ''
-        export PATH="$HOME/.local/bin"
-      '';
+      # bashrcExtra = ''
+      #   export PATH="$HOME/.local/bin"
+      # '';
     };
   };
 }
