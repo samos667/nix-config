@@ -10,7 +10,16 @@ in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-config.nix
+    ./font.nix
   ];
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+    ];
+  };
 
   networking.hostName = hostname;
   # networking.computerName = hostname;

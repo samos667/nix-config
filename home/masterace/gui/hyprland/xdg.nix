@@ -12,13 +12,7 @@
     xdg-user-dirs
   ];
 
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr
-    ];
-  };
+
   xdg.configFile."mimeapps.list".force = true;
   xdg = {
     enable = true;
@@ -40,7 +34,7 @@
       # let `xdg-open` to open the url with the correct application.
       defaultApplications = let
         browser = ["firefox.desktop"];
-        editor = ["nvim.desktop" "Helix.desktop" "code.desktop" "code-insiders.desktop"];
+        editor = ["nvim.desktop"];
       in {
         "application/json" = browser;
         "application/pdf" = browser; # TODO: pdf viewer
