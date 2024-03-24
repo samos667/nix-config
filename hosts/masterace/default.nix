@@ -10,6 +10,7 @@ in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-config.nix
+    ./../../home/masterace/gui/hyprland/values
   ];
 
   networking.hostName = hostname;
