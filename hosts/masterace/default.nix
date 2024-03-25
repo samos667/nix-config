@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs, lib, ...}:
 #############################################################
 #
 #  Ai - my main computer, with NixOS + I5-13600KF + RTX 4090 GPU, for gaming & daily use.
@@ -10,6 +10,11 @@ in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-config.nix
+    ./core.nix
+    ./nix.nix
+    ./packages.nix
+    ./zram.nix
+    ./i18n.nix
     ./font.nix
   ];
 
@@ -23,9 +28,6 @@ in {
 
   networking.hostName = hostname;
   # networking.computerName = hostname;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Paris";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sam = {
@@ -43,28 +45,8 @@ in {
     initialHashedPassword = "$7$CU..../....cM.cjpSdcybWBpckxY1b90$grq57TCZ9N5gpXRech0atSYOu0Qwi4k9WRgRUOTsh53";
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   users.users.sam.shell = pkgs.nushell;
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "fr_FR.UTF-8";
-    LC_IDENTIFICATION = "fr_FR.UTF-8";
-    LC_MEASUREMENT = "fr_FR.UTF-8";
-    LC_MONETARY = "fr_FR.UTF-8";
-    LC_NAME = "fr_FR.UTF-8";
-    LC_NUMERIC = "fr_FR.UTF-8";
-    LC_PAPER = "fr_FR.UTF-8";
-    LC_TELEPHONE = "fr_FR.UTF-8";
-    LC_TIME = "fr_FR.UTF-8";
-  };
-
-  # Enable hyprland
-  # programs.hyprland.enable = true;
 
   # Configure console keymap
   console.keyMap = "fr";
