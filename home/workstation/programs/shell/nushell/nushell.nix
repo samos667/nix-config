@@ -8,7 +8,7 @@
     nix-apply = "sudo nixos-rebuild switch";
     nix-test = "sudo nixos-rebuild test";
     # Git aliases
-    wksp = "cd $'($env.HOME)/git/' ; ls";
+    wksp = "cd $'($env.HOME)/git/'";
     cdnix = "cd /etc/nixos";
     gaa = "git add .";
     gp = "git push";

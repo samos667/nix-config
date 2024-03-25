@@ -166,3 +166,4 @@ def ggb [arg] {
 def gacp [arg] {
   git add . ; git commit -am $arg ; git push
 }
+
