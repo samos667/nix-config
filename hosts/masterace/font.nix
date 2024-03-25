@@ -32,12 +32,8 @@
           "NerdFontsSymbolsOnly"
           # Characters
           "FiraCode"
-          "JetBrainsMono"
-          "Iosevka"
         ];
       })
-      julia-mono
-      dejavu_fonts
     ];
 
     # user defined fonts
@@ -46,7 +42,7 @@
     fontconfig.defaultFonts = {
       serif = ["FiraCode Nerd Font"];
       sansSerif = ["FiraCode Nerd Font"];
-      monospace = ["FiraCode Nerd Font"];
+      monospace = ["FiraCode Nerd Font Mono"];
       emoji = ["FiraCode Nerd Font"];
     };
   };

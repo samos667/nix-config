@@ -32,7 +32,7 @@
 
       * {
         transition: 200ms ease;
-        font-family: "JetBrainsMono Nerd Font";
+        font-family: "FiraCode Nerd Font";
         font-size: 1.3rem;
       }
 

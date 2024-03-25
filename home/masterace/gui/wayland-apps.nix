@@ -11,8 +11,10 @@
       shell=${pkgs.bash}/bin/bash --login -c 'nu --login --interactive'
       term=foot
       initial-window-mode=windowed
+      font=FiraCode Nerd Font:size=12
       [mouse]
       hide-when-typing=yes
+
     ''
     + (builtins.readFile "${nur-ryan4yin.packages.${pkgs.system}.catppuccin-foot}/catppuccin-mocha.conf");
 
@@ -53,6 +55,9 @@
       enable = true;
       enableGnomeExtensions = false;
       package = pkgs.firefox-wayland; # firefox with wayland support
+    };
+    vivaldi = {
+      enable = true;
     };
   };
 }
