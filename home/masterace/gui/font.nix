@@ -7,8 +7,7 @@
       fira-code-symbols
       (iosevka-bin.override {variant = "aile";})
       material-design-icons
-      monolisa-script
-      (nerdfonts.override {fonts = ["FiraCode"];})
+      (nerdfonts.override {fonts = ["Fira"];})
       noto-fonts
       powerline-symbols
       # sf-mono-liga-bin
