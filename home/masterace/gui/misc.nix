@@ -8,6 +8,7 @@
     # instant messaging
     # telegram-desktop
     discord
+    vivaldi
 
     # remote desktop(rdp connect)
     # remmina
