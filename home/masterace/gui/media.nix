@@ -22,6 +22,8 @@
     glxinfo
   ];
 
+  services.easyeffects.enable = true;
+
   # https://github.com/catppuccin/cava
   xdg.configFile."cava/config".text =
     ''

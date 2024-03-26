@@ -9,6 +9,8 @@
     # telegram-desktop
     discord
     vivaldi
+    vivaldi-ffmpeg-codecs
+    obs-studio
 
     # remote desktop(rdp connect)
     # remmina
