@@ -11,6 +11,7 @@
     vivaldi
     vivaldi-ffmpeg-codecs
     obs-studio
+    syncthing
 
     # remote desktop(rdp connect)
     # remmina
