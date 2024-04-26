@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# Set strict mode
+set -euo pipefail
+
+# Function to clean up temporary files
+cleanup() {
+    rm -rf "$TEMP_DIR"
+}
+
+# Create a temporary directory
+TEMP_DIR=$(mktemp -d)
+trap cleanup EXIT
+
+# Set output directory and filename
+OUTPUT_DIR="$HOME/gif"
+FILENAME="$(date +%s).gif"
+
+# Ensure output directory exists
+mkdir -p "$OUTPUT_DIR"
+
+# Record screen area
+echo "Select the area to record..."
+if ! wl-screenrec -g "$(slurp)" -f "$TEMP_DIR/temp.mp4"; then
+    echo "Error: Screen recording failed" >&2
+    exit 1
+fi
+
+# Convert to GIF
+echo "Converting to GIF..."
+if ! ffmpeg -i "$TEMP_DIR/temp.mp4" -vf "fps=10,scale=320:-1:flags=lanczos" "$OUTPUT_DIR/$FILENAME"; then
+    echo "Error: Conversion to GIF failed" >&2
+    exit 1
+fi
+
+echo "GIF saved as $OUTPUT_DIR/$FILENAME"
