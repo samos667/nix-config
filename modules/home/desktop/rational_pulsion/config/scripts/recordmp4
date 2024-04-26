@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+timestamp=$(date +%s)
+foldername=$(date +%Y-%m-%d)
+video_dir="$HOME/Videos/rec/$foldername"
+
+mkdir -p "$video_dir"
+
+if ! command -v wl-screenrec &> /dev/null; then
+    echo "Error: wl-screenrec not found. Please install it." >&2
+    exit 1
+fi
+
+if ! command -v slurp &> /dev/null; then
+    echo "Error: slurp not found. Please install it." >&2
+    exit 1
+fi
+
+geometry=$(slurp)
+if [ -z "$geometry" ]; then
+    echo "Error: No area selected." >&2
+    exit 1
+fi
+
+if ! wl-screenrec -g "$geometry" -f "$video_dir/$timestamp.mp4"; then
+    echo "Error: Recording failed." >&2
+    exit 1
+fi
+
+if ! cd "$video_dir"; then
+    echo "Error: Could not change to directory $video_dir" >&2
+    exit 1
+fi
+
+if ! command -v thunar &> /dev/null; then
+    echo "Warning: thunar not found. Skipping file browser launch." >&2
+else
+    thunar "$video_dir"
+fi

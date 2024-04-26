@@ -1,0 +1,115 @@
+add_newline = true
+format = """\
+[](bg:#1e1e2e fg:green)\
+$nix_shell\
+$os\
+[](fg:green bg:surface3)\
+$time\
+$cmd_duration\
+[](fg:surface3 bg:sun)\
+$directory\
+[](fg:sun bg:blue)\
+$git_branch\
+$git_status\
+[](fg:blue)
+$character
+"""
+
+palette = "catppuccin_mocha"
+
+[directory]
+format = "[ $path ]($style)"
+style = "fg:subtext2 bg:sun"
+
+[git_branch]
+format = '[ $symbol$branch(:$remote_branch) ]($style)'
+symbol = " "
+style = "fg:surface3 bg:blue"
+
+[git_status]
+format = '[$all_status]($style)'
+style = "fg:surface3 bg:blue"
+
+ahead = "󰈑"
+behind = " "
+conflicted = " "
+deleted = " "
+diverged = "󱡷 "
+modified = " "
+renamed = "󰑕 "
+staged = "++($count) "
+stashed = " "
+untracked = " "
+
+[os]
+disabled = false
+style = "fg:surface3 bg:green"
+
+[os.symbols]
+Debian = " "
+FreeBSD = " "
+Linux = " "
+NixOS = " "
+OpenBSD = " "
+Raspbian = " "
+Redhat = " "
+Ubuntu = "󰕈 "
+Windows = " "
+
+[nix_shell]
+style = "bold fg:surface3 bg:green"
+impure_msg = '\(IMPURE SHELL\) '
+pure_msg = '\(PURE SHELL\) '
+unknown_msg = '\(UNKNOWN SHELL\) '
+format = '[$state]($style)'
+
+[character]
+error_symbol = "[• 󰅙 ](fg:danger)"
+success_symbol = "[•  ](fg:green)"
+format = "$symbol"
+
+[hg_branch]
+format = "[ $symbol$branch ]($style)"
+symbol = " "
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:surface3 fg:green"
+format = "[ 󱑍 $time ]($style)"
+
+[cmd_duration]
+style = "bg:surface3 fg:green"
+format = "[󱫑 $duration ]($style)"
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+danger = "#E84D44"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+sun = "#FCF392"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext2 = "#1C3A5E"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface3 = "#1C3A5E"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"

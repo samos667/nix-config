@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+## Autostart Programs
+
+# Kill already running process
+_ps=(waybar mako mpd)
+for _prs in "${_ps[@]}"; do
+	if [[ $(pidof "${_prs}") ]]; then
+		killall -9 "${_prs}"
+	fi
+done
+
+# Setup wallpaper (swww)
+~/.config/scripts/wallpaper &
+
+# Lauch notification daemon (mako)
+~/.config/scripts/notifications &
+
+# Lauch statusbar (waybar)
+~/.config/scripts/statusbar &
+
+
+# Start mpd
+exec mpd &
+
+wl-paste --type text --watch cliphist store &
+
+wl-paste --type image --watch cliphist store &
+
+easyeffects --gapplication-service
