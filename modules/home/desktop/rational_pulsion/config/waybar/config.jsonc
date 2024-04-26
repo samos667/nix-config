@@ -1,0 +1,163 @@
+{
+  "position": "top",
+  "layer": "top",
+  "modules-left": [
+    "custom/launcher",
+    "custom/playerctl",
+    "cava"
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "memory",
+    "cpu",
+    "temperature",
+    "network",
+    "clock",
+    "custom/powermenu",
+    "tray",
+  ],
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": "",
+      "default": "",
+    },
+  },
+  "cava": {
+    //        "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+    "framerate": 120,
+    "autosens": 1,
+    "sensitivity": 2,
+    "bars": 20,
+    "lower_cutoff_freq": 60,
+    "higher_cutoff_freq": 10000,
+    "method": "pulse",
+    "source": "auto",
+    "stereo": true,
+    "reverse": false,
+    "bar_delimiter": 0,
+    "monstercat": false,
+    "waves": false,
+    "noise_reduction": 0.77,
+    "input_delay": 2,
+    "format-icons": [
+      "▁",
+      "▂",
+      "▃",
+      "▄",
+      "▅",
+      "▆",
+      "▇",
+      "█"
+    ],
+    "actions": {
+      "on-click-right": "mode",
+      "gravity": 200,
+    },
+  },
+  "clock": {
+    "interval": 60,
+    "align": 0,
+    "rotate": 0,
+    "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": " {:%H:%M}",
+    "format-alt": " {:%a %b %d, %G}",
+  },
+  "cpu": {
+    "format": "\udb80\udf5b {usage}%",
+    "interval": 1,
+    "on-click-middle": "lact",
+    "on-click-right": "wezterm gotop",
+  },
+  "custom/launcher": {
+    "format": "\uf313 ",
+    "on-click": "$HOME/.config/scripts/menu",
+    "on-click-middle": "exec $HOME/.config/scripts/wallpaper",
+    "on-click-right": "exec $HOME/.config/scripts/wallpaper",
+    "tooltip": false,
+  },
+  "custom/powermenu": {
+    "format": "\uf011",
+    "on-click": "$HOME/.config/scripts/wlogout",
+    "tooltip": false,
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "\uf06e",
+      "deactivated": "\uf070",
+    },
+    "tooltip": false,
+  },
+  "memory": {
+    "format": "\udb83\udee0 {percentage}%",
+    "interval": 1,
+    "states": {
+      "warning": 85,
+    },
+  },
+  "custom/playerctl": {
+    "format": "{icon}  <span>{}</span>",
+    "return-type": "json",
+    "max-length": 55,
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "on-click-middle": "playerctl previous",
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next",
+    "format-icons": {
+      "Paused": "<span foreground='#6dd9d9'></span>",
+      "Playing": "<span foreground='#82db97'></span>",
+    },
+  },
+  "network": {
+    "interval": 5,
+    //"interface": "wlan*", // (Optional) To force the use of this interface, set it for netspeed to work
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": " {ipaddr}/{cidr}",
+    "format-linked": " {ifname} (No IP)",
+    "format-disconnected": "睊 Disconnected",
+    "format-disabled": "睊 Disabled",
+    "format-alt": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
+    "tooltip-format": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
+    "on-click-middle": "nm-connection-editor",
+    "on-click-right": "nm-connection-editor",
+  },
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ],
+    },
+    "scroll-step": 5.0,
+    // Commands to execute on events
+    "on-click": "amixer set Master toggle",
+    "on-click-right": "pavucontrol",
+    "smooth-scrolling-threshold": 1,
+  },
+  "temperature": {
+    "format": "\uf2c9 {temperatureC}\u00b0C",
+    "tooltip": false,
+  },
+  "tray": {
+    "icon-size": 15,
+    "spacing": 5,
+  },
+}
