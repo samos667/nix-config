@@ -54,7 +54,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = inputs;
+            home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.backupFileExtension = "bkp";
             home-manager.users.sam = import ./home/masterace/home.nix;
           }
@@ -71,10 +71,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:Aylur/ags";
     agenix.url = "github:ryantm/agenix";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixvim.url = "github:samos667/nixvim-config";
     # astronvim = {
     #   url = "github:samos667/astrodots";
     #   flake = false;
