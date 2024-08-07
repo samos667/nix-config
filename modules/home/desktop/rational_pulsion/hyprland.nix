@@ -1,4 +1,4 @@
-{ pkgs, hyprland, ... }: {
+{ pkgs, inputs, ... }: {
   # NOTE:
   # We have to enable hyprland/i3's systemd user service in home-manager,
   # so that gammastep/wallpaper-switcher's user service can be start correctly!
@@ -25,7 +25,7 @@
         "WLR_NO_HARDWARE_CURSORS,1"
       ];
     };
-    package = hyprland.packages.${pkgs.system}.hyprland;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     # gammastep/wallpaper-switcher need this to be enabled.
     systemd.enable = true;
   };

@@ -1,10 +1,10 @@
-{ pkgs, anyrun, ... }: {
-  imports = [ anyrun.homeManagerModules.default ];
+{ pkgs, inputs, ... }: {
+  imports = [ inputs.anyrun.homeManagerModules.default ];
 
   programs.anyrun = {
     enable = true;
     config = {
-      plugins = with anyrun.packages.${pkgs.system}; [
+      plugins = with inputs.anyrun.packages.${pkgs.system}; [
         applications
         # randr
         rink

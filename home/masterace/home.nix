@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ inputs, pkgs, username, homeDirectory, ... }: {
   imports = [
     ../../modules/home/common.nix
     ../../modules/home/tui/tools
@@ -8,5 +8,15 @@
     ../../modules/home/gaming
   ];
 
-  home.packages = with pkgs; [ inputs.nivxim.packages.${system}.default ];
+  home = {
+    inherit username homeDirectory;
+    stateVersion = "23.11";
+  };
+
+  # Let Home Manager install and manage itself.
+  programs = { home-manager.enable = true; };
+
+  nixpkgs = { config = { allowUnfree = true; }; };
+
+  home.packages = [ inputs.nixvim.packages.${pkgs.system}.default ];
 }
