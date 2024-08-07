@@ -1,7 +1,11 @@
-def vgit [arg] {
-  env FLATPAK_ENABLE_SDK_EXT=node18 flatpak run $'--cwd=/home/sam/git/($arg)' io.neovim.nvim
+def vnix [] {
+  cd /etc/nixos;
+  v;
+  cd -
 }
 
-def v [arg] {
-  env FLATPAK_ENABLE_SDK_EXT=node18 flatpak run $'--cwd=/home/sam/($arg)' io.neovim.nvim
+def vgit [arg] {
+  cd $'~/git/($arg)';
+  v;
+  cd -
 }

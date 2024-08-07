@@ -3,6 +3,7 @@ alias cdn = cd /etc/nixos
 alias cds = cd ~/Sync
 alias d = docker
 alias dc = docker compose
+alias v = nvim
 
 ### Nixos
 alias nt = sudo nixos-rebuild test
