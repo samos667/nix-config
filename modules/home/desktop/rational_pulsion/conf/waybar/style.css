@@ -25,7 +25,7 @@
 }
 window#waybar {
   background-color: transparent;
-  border: 2px solid alpha(@crust, 0.3);
+  border: 0px solid alpha(@crust, 0.3);
 }
 /* window > box { */
 /*   margin-left: 5px; */
@@ -175,7 +175,7 @@ tooltip label {
   padding-right: 4px;
   margin: 0px 0px 0px 0px;
   background-color: alpha(@surface0, 0.5);
-/*  background: linear-gradient(alpha(@rosewater, 0.5),alpha(@lavender, 1)); */ 
+  /*  background: linear-gradient(alpha(@rosewater, 0.5),alpha(@lavender, 1)); */
 }
 #mpd.paused {
   color: #414868;
