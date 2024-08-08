@@ -1,7 +1,10 @@
 {
   xdg.configFile = {
     "foot/foot.ini" = { source = ./conf/foot/foot.ini; };
-    "hypr" = { source = ./conf/hypr; };
+    "mako" = { source = ./conf/mako; };
+    "scripts" = { source = ./conf/scripts; };
+    "wlogout" = { source = ./conf/wlogout; };
+    "waybar" = { source = ./conf/waybar; };
     "swaylock" = {
       source = ./conf/swaylock;
       recursive = true;

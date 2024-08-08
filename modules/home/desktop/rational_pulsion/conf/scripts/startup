@@ -11,14 +11,21 @@ for _prs in "${_ps[@]}"; do
 done
 
 # Lauch notification daemon (mako)
-~/.config/hypr/scripts/wallpaper &
+~/.config/scripts/notifications &
 
-~/.config/hypr/scripts/notifications &
+# init wallpaper (swww)
+swww-daemon --format xrgb &
+~/.config/scripts/wallpaper &
 
 # Lauch statusbar (waybar)
-~/.config/hypr/scripts/statusbar &
+~/.config/scripts/statusbar &
 
 # Start mpd
 exec mpd &
 
-# easyeffects -w
+
+wl-paste --type text --watch cliphist store &
+
+wl-paste --type image --watch cliphist store &
+
+easyeffects --gapplication-service

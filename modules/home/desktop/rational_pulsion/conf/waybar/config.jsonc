@@ -17,7 +17,7 @@
     "network",
     "clock",
     "custom/powermenu",
-    "tray"
+    "tray",
   ],
   "hyprland/workspaces": {
     "format": "{icon}",
@@ -28,11 +28,11 @@
       "4": "",
       "5": "",
       "active": "", // 
-      "default": ""
+      "default": "",
     },
     "persistent-workspaces": {
-      "*": 5 // 5 workspaces by default on every monitor
-    }
+      "*": 5, // 5 workspaces by default on every monitor
+    },
   },
   "cava": {
     //        "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
@@ -63,8 +63,8 @@
     ],
     "actions": {
       "on-click-right": "mode",
-      "gravity": 200
-    }
+      "gravity": 200,
+    },
   },
   "clock": {
     "interval": 60,
@@ -72,40 +72,40 @@
     "rotate": 0,
     "tooltip-format": "<big>{:%B %Y}</big>\n<tt><small>{calendar}</small></tt>",
     "format": " {:%H:%M}",
-    "format-alt": " {:%a %b %d, %G}"
+    "format-alt": " {:%a %b %d, %G}",
   },
   "cpu": {
     "format": "\udb80\udf5b {usage}%",
     "interval": 1,
     "on-click-middle": "foot btm",
-    "on-click-right": "foot btm"
+    "on-click-right": "foot btm",
   },
   "custom/launcher": {
     "format": "\uf313 ",
-    "on-click": "$HOME/.config/hypr/scripts/menu",
-    "on-click-middle": "exec $HOME/.config/hypr/scripts/wallpaper",
-    "on-click-right": "exec $HOME/.config/hypr/scripts/wallpaper",
-    "tooltip": false
+    "on-click": "$HOME/.config/scripts/menu",
+    "on-click-middle": "exec $HOME/.config/scripts/wallpaper",
+    "on-click-right": "exec $HOME/.config/scripts/wallpaper",
+    "tooltip": false,
   },
   "custom/powermenu": {
     "format": "\uf011",
-    "on-click": "$HOME/.config/hypr/scripts/wlogout",
-    "tooltip": false
+    "on-click": "$HOME/.config/scripts/wlogout",
+    "tooltip": false,
   },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "\uf06e",
-      "deactivated": "\uf070"
+      "deactivated": "\uf070",
     },
-    "tooltip": false
+    "tooltip": false,
   },
   "memory": {
     "format": "\udb83\udee0 {percentage}%",
     "interval": 1,
     "states": {
-      "warning": 85
-    }
+      "warning": 85,
+    },
   },
   "custom/playerctl": {
     "format": "{icon}  <span>{}</span>",
@@ -117,8 +117,8 @@
     "on-click-right": "playerctl next",
     "format-icons": {
       "Paused": "<span foreground='#6dd9d9'></span>",
-      "Playing": "<span foreground='#82db97'></span>"
-    }
+      "Playing": "<span foreground='#82db97'></span>",
+    },
   },
   "network": {
     "interval": 5,
@@ -131,7 +131,7 @@
     "format-alt": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
     "tooltip-format": " {bandwidthUpBytes} |  {bandwidthDownBytes}",
     "on-click-middle": "nm-connection-editor",
-    "on-click-right": "nm-connection-editor"
+    "on-click-right": "nm-connection-editor",
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
@@ -152,20 +152,20 @@
         "",
         "",
         ""
-      ]
+      ],
     },
     "scroll-step": 5.0,
     // Commands to execute on events
     "on-click": "amixer set Master toggle",
     "on-click-right": "pavucontrol",
-    "smooth-scrolling-threshold": 1
+    "smooth-scrolling-threshold": 1,
   },
   "temperature": {
     "format": "\uf2c9 {temperatureC}\u00b0C",
-    "tooltip": false
+    "tooltip": false,
   },
   "tray": {
     "icon-size": 15,
-    "spacing": 5
-  }
+    "spacing": 5,
+  },
 }

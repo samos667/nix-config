@@ -16,16 +16,5 @@
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
-
-    theme = {
-      # https://github.com/catppuccin/gtk
-      name = "Catppuccin-Mocha-Compact-Blue-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        # https://github.com/NixOS/nixpkgs/blob/nixos-23.05/pkgs/data/themes/catppuccin-gtk/default.nix
-        accents = [ "blue" ];
-        size = "compact";
-        variant = "mocha";
-      };
-    };
   };
 }
