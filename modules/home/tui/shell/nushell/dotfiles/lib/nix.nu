@@ -9,8 +9,7 @@ def nix-run [
   }
 }
 
-def ns [] {
-  cd /etc/nixos
-  git pull --rebase
-  sudo nixos-rebuild switch
+def fu [] {
+  cd /etc/nixos;
+  sudo nix flake update
 }

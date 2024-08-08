@@ -7,7 +7,7 @@ alias v = nvim
 
 ### Nixos
 alias nt = sudo nixos-rebuild test
-alias fr = nix flake update
+alias ns = sudo nixos-rebuild switch
 
 ### Kubernetes
 alias k = kubectl
