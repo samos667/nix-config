@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     waybar # the status bar
-    swww # the wallpaper
     swayidle # the idle timeout
     swaylock # locking the screen
     wlogout # logout menu

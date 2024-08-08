@@ -1,6 +1,6 @@
 {
   xdg.configFile = {
-    "foot/foot.ini" = { source = ./conf/foot/foot.ini; };
+    # "foot/foot.ini" = { source = ./conf/foot/foot.ini; };
     "mako" = { source = ./conf/mako; };
     "scripts" = { source = ./conf/scripts; };
     "wlogout" = { source = ./conf/wlogout; };

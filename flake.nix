@@ -13,9 +13,10 @@
     nixvim.url = "github:samos667/nixvim-config";
     hyprland.url = "github:hyprwm/Hyprland/v0.40.0";
     anyrun.url = "github:Kirottu/anyrun";
+    stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, agenix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, agenix, stylix, ... }@inputs:
     let
       inherit (nixpkgs.lib) nixosSystem;
       supportedSystems =
@@ -38,6 +39,7 @@
           };
           modules = [ ./hosts/${hostname} { networking.hostName = hostname; } ]
             ++ (if includeHomeManager then [
+              stylix.nixosModules.stylix
               home-manager.nixosModules.home-manager
               {
                 home-manager = {

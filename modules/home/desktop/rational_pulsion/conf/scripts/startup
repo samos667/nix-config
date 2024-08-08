@@ -13,16 +13,11 @@ done
 # Lauch notification daemon (mako)
 ~/.config/scripts/notifications &
 
-# init wallpaper (swww)
-swww-daemon --format xrgb &
-~/.config/scripts/wallpaper &
-
 # Lauch statusbar (waybar)
 ~/.config/scripts/statusbar &
 
 # Start mpd
 exec mpd &
-
 
 wl-paste --type text --watch cliphist store &
 
