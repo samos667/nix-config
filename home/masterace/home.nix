@@ -1,8 +1,13 @@
-{ inputs, pkgs, username, homeDirectory, ... }: {
+{
+  username,
+  homeDirectory,
+  ...
+}: {
   imports = [
     ../../modules/home/common.nix
     ../../modules/home/tui/tools
     ../../modules/home/tui/shell
+    ../../modules/home/tui/editor/nvim
     ../../modules/home/desktop/rational_pulsion
     ../../modules/home/desktop/common
     ../../modules/home/gaming
@@ -14,9 +19,7 @@
   };
 
   # Let Home Manager install and manage itself.
-  programs = { home-manager.enable = true; };
+  programs.home-manager.enable = true;
 
-  nixpkgs = { config = { allowUnfree = true; }; };
-
-  home.packages = [ inputs.nixvim.packages.${pkgs.system}.default ];
+  nixpkgs.config.allowUnfree = true;
 }

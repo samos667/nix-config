@@ -765,11 +765,11 @@
         "nixvim": "nixvim_2"
       },
       "locked": {
-        "lastModified": 1723069528,
-        "narHash": "sha256-EC8kXh2rdQFYEze9apixDp+lnQljPdXlI0V80L2Ydj0=",
+        "lastModified": 1723165953,
+        "narHash": "sha256-/pRpYA7S8AFDdlWqZmelse4RH0G/iPd1fsp9R706e1Y=",
         "owner": "samos667",
         "repo": "nixvim-config",
-        "rev": "ceed30055e9811b7b3ee14278bddac09219ec843",
+        "rev": "ea60c5f686e4e9dfeea750c3d6a8a7ea6012670e",
         "type": "github"
       },
       "original": {
