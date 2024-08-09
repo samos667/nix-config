@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     waybar # the status bar
     swayidle # the idle timeout
@@ -36,6 +36,13 @@
     foot = {
       enable = true;
       server.enable = true;
+      settings = {
+        key-bindings = {
+          clipboard-copy = "Control+c";
+          clipboard-paste = "Control+v";
+          search-start = "Control+f";
+        };
+      };
     };
 
     firefox = {

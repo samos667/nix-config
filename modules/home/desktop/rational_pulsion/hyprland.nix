@@ -1,4 +1,8 @@
-{ pkgs, inputs, ... }: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   # NOTE:
   # We have to enable hyprland/i3's systemd user service in home-manager,
   # so that gammastep/wallpaper-switcher's user service can be start correctly!
@@ -44,8 +48,7 @@
         gaps_workspaces = 50;
         border_size = 1;
         layout = "dwindle";
-        apply_sens_to_raw =
-          1; # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
+        apply_sens_to_raw = 1;
       };
       decoration = {
         rounding = 20;
@@ -53,8 +56,6 @@
         drop_shadow = false;
         shadow_range = 20;
         shadow_render_power = 3;
-        # "col.shadow" = "rgb(${oxocarbon_background})";
-        # "col.shadow_inactive" = "${background}";
         blur = {
           enabled = true;
           size = 4;
@@ -135,7 +136,7 @@
           2; # leave it on 2 (full) unless you hate your GPU and want to make it suffer!
       };
 
-      exec-once = [ "~/.config/scripts/startup" ];
+      exec-once = ["~/.config/scripts/startup"];
 
       bind = [
         "SUPER,Q,killactive,"
@@ -215,7 +216,6 @@
         "SUPER,L,exec,~/.config/scripts/lockscreen"
         "Control_L,F8,exec,amixer set Capture toggle" # Toggle mic system-wide
         "Control_L,F9,exec,grimblast copysave area"
-
       ];
 
       bindm = [
@@ -225,16 +225,18 @@
       ];
 
       windowrule = [
-        "float, ^(foot)$"
         "float, title:(Easy Effects)$"
         "float, title:(Picture-in-Picture)$"
         "float, title:^(Extension)(.*)$"
       ];
 
       windowrulev2 = [
-        "opacity 0.95 0.95,class:^(nautilus)$"
+        "opacity 0.95 0.95,class:^(org.gnome.Nautilus)$"
         "opacity 0.95 0.95,class:^(discord)$"
         "opacity 0.95 0.95,class:^(vesktop)$"
+        "float,class:^(org.gnome.Nautilus)$"
+        "float,class:^(vesktop)$"
+        "float,class:^(foot)$"
         "float,class:^(pavucontrol)$"
         "float,class:^(file_progress)$"
         "float,class:^(confirm)$"
@@ -248,6 +250,15 @@
         "float,title:^(Confirm to replace files)$"
         "float,title:^(File Operation Progress)$"
         "float,title:^(mpv)$"
+      ];
+      layerrule = [
+        "noanim, walker"
+        "noanim, selection"
+        "noanim, overview"
+        "noanim, anyrun"
+        "noanim, indicator.*"
+        "noanim, osk"
+        "noanim, hyprpicker"
       ];
     };
     extraConfig = ''
