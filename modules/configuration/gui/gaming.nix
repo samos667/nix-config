@@ -1,7 +1,24 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
-    lutris
+    # (lutris.override
+    #   {
+    #     stdenv.hostPlatform.system = "x86_64-linux";
+    #   })
+    cartridges
+    wineWowPackages.waylandFull
+    winetricks
+    protontricks
+    rivalcfg
   ];
+  # Steelseries
+  services.udev.extraRules = ''
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1038", MODE="0666", GROUP="plugdev"
+  '';
+  users.users.sam.extraGroups = ["plugdev"];
 
   hardware.xone.enable = true; # To use xbox controller wireless
   virtualisation.waydroid.enable = true;
@@ -22,18 +39,36 @@
         "name" = "gamescope";
         "nice" = -20;
       }
+      {
+        "name" = "easyeffects";
+        "nice" = -21;
+      }
+      {
+        "name" = "pipewire";
+        "nice" = -22;
+      }
     ];
   };
+  # https://nixos.wiki/wiki/steam
+  # https://wiki.archlinux.org/title/Steam
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
     extraPackages = with pkgs; [
-      zulu
       mangohud
     ];
-    # remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    # dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    # https://github.com/fufexan/nix-gaming?tab=readme-ov-file#platform-optimizations
+    platformOptimizations.enable = true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+      inputs.nix-gaming.packages.${pkgs.system}.northstar-proton
+    ];
   };
+  imports = [
+    inputs.nix-gaming.nixosModules.platformOptimizations
+  ];
+
+  # https://nixos.wiki/wiki/Appimage
   boot.binfmt.registrations.appimage = {
     wrapInterpreterInShell = false;
     interpreter = "${pkgs.appimage-run}/bin/appimage-run";

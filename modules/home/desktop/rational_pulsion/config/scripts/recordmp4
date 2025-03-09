@@ -8,7 +8,7 @@ video_dir="$HOME/Videos/rec/$foldername"
 
 mkdir -p "$video_dir"
 
-if ! command -v wl-screenrec &> /dev/null; then
+if ! command -v wf-recorder &> /dev/null; then
     echo "Error: wl-screenrec not found. Please install it." >&2
     exit 1
 fi
@@ -24,7 +24,7 @@ if [ -z "$geometry" ]; then
     exit 1
 fi
 
-if ! wl-screenrec -g "$geometry" -f "$video_dir/$timestamp.mp4"; then
+if ! wl-screenrec -g "$geometry" --codec av1 -f "$video_dir/$timestamp.mp4"; then
     echo "Error: Recording failed." >&2
     exit 1
 fi

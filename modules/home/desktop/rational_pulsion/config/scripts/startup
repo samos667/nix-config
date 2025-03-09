@@ -23,8 +23,13 @@ done
 # Start mpd
 exec mpd &
 
-wl-paste --type text --watch cliphist store &
 
-wl-paste --type image --watch cliphist store &
+wl-paste --watch cliphist store &
 
-easyeffects --gapplication-service
+easyeffects --gapplication-service &
+
+play-with-mpv &
+
+sleep 10
+blueman-applet &
+blueman-tray &

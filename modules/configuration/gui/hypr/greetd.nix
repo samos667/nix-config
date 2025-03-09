@@ -1,14 +1,11 @@
-{pkgs, ...}: let
-  hyprConfig = pkgs.writeText "greetd-hypr-config" ''
-    exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
-
-    input {
-      kb_layout = fr # Baguette
-    }
-  '';
-in {
+{pkgs, ...}: {
   services.greetd = {
     enable = true;
-    settings.default_session.command = "${pkgs.hyprland}/bin/Hyprland --config ${hyprConfig}";
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --theme border=magenta;text=white;prompt=green;time=red;action=blue;button=yellow;container=black;input=red --cmd Hyprland";
+        user = "greeter";
+      };
+    };
   };
 }

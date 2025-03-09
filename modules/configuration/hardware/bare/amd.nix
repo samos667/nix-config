@@ -3,28 +3,24 @@
   inputs,
   ...
 }: let
-  pkgs-unstable = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  hyprland = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in {
   hardware = {
     graphics = {
       enable = true;
-      package = pkgs-unstable.mesa.drivers;
-      enable32Bit = true;
-      package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
-      extraPackages32 = with pkgs; [
-        driversi686Linux.amdvlk
+      package = hyprland.mesa.drivers;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        rocmPackages.clr.icd
       ];
+
+      enable32Bit = true;
+      package32 = hyprland.pkgsi686Linux.mesa.drivers;
     };
     amdgpu = {
       opencl.enable = true;
     };
   };
-
-  hardware.opengl.extraPackages = with pkgs; [
-    rocmPackages.clr
-    rocmPackages.clr.icd
-    vaapiVdpau
-  ];
 
   systemd = {
     packages = with pkgs; [lact];
@@ -33,5 +29,5 @@ in {
       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];
   };
-  environment.systemPackages = with pkgs; [lact nvtop];
+  environment.systemPackages = with pkgs; [lact nvtopPackages.full];
 }

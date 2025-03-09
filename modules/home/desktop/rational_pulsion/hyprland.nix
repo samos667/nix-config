@@ -8,18 +8,20 @@
     settings = {
       "$mainMod" = "SUPER";
       monitor = [
-        "HDMI-A-1, 1920x1080@60, 0x0, 1"
-        "DP-1, 2560x1440@360, 1920x0, 1"
-        # "DP-1, 2560x1440@360, 1920x0, 1, bitdepth, 10"
+        "HDMI-A-1, 1920x1080@60, 0x0, 1, bitdepth, 8"
+        # "DP-1, 2560x1440@360, 1920x0, 1"
+        "DP-1, 2560x1440@360, 1920x0, 1, bitdepth, 10"
         "DP-2,disable"
         "Unknown-1,disable"
       ];
 
       env = [
-        "GDK_SCALE,1"
-        "XCURSOR_SIZE,32"
+        # "GDK_SCALE,1"
+        # "XCURSOR_SIZE,36"
+        # "HYPRCURSOR_SIZE,36"
         "VDPAU_DRIVER,radeonsi"
         "LIBVA_DRIVER_NAME,radeonsi"
+        "SDL_VIDEODRIVER,wayland"
       ];
 
       workspace = [
@@ -54,6 +56,10 @@
         gaps_workspaces = 50;
         border_size = 1;
         layout = "dwindle";
+        allow_tearing = true;
+      };
+      experimental = {
+        xx_color_management_v4 = true;
       };
 
       decoration = {
@@ -113,7 +119,7 @@
         vfr =
           true; # misc:no_vfr -> misc:vfr. bool, heavily recommended to leave at default on. Saves on CPU usage.
         vrr =
-          0; # misc:vrr -> Adaptive sync of your monitor. 0 (off), 1 (on), 2 (fullscreen only). Default 0 to avoid white flashes on select hardware.
+          1; # misc:vrr -> Adaptive sync of your monitor. 0 (off), 1 (on), 2 (fullscreen only). Default 0 to avoid white flashes on select hardware.
         disable_hyprland_logo = true;
       };
 
@@ -208,11 +214,11 @@
         "SUPER,B,exec,google-chrome-stable"
         "SUPER,E,exec,thunar"
         "SUPER,T,exec,wezterm"
-        "SUPER,V,exec,wezterm start nvim"
+        "SUPER,V,exec,neovide"
         "SUPER,less,exec,~/.config/scripts/menu"
         "SUPER,F4,exec,hyprlock"
         "Control_L,F7,exec, wezterm start ~/.config/scripts/recordmp4"
-        "Control_L,F8,exec,amixer set Capture toggle" # Toggle mic system-wide
+        "Control_L,F8,exec,pulsemixer --toggle-mute --id source-61" # Toggle mic system-wide
         "Control_L,F9,exec,grimblast --freeze copysave area"
       ];
 
@@ -223,13 +229,38 @@
       ];
 
       windowrulev2 = [
-        "float, class:^(imv|mpv|vesktop|thunar|Spotify|xdg-desktop-portal-gtk|Waydroid|waydroid)$"
-        "float, title:^(pavucontrol|Easy Effects|Extension|Picture in picture)$"
-        "monitor HDMI-A-1, class:^(vesktop|Spotify)$"
+        # Common
+        "float, class:^(swayimg|mpv|vesktop|discord|thunar|Spotify|xdg-desktop-portal-gtk|Waydroid|waydroid|steam|.blueman-manager-wrapped|org.pulseaudio.pavucontrol|io.github.lact-linux)$"
+        "float, title:^(pavucontrol|Easy Effects|Extension|Picture in picture|Bitwarden)$"
+        "tile, class:^(steam)$, title:^(Steam)$"
+        "monitor HDMI-A-1, class:^(vesktop|discord|Spotify)$"
         "monitor HDMI-A-1, title:^(Picture in picture)$"
-        "size 50% 50%, class:^(mpv|foot|vesktop|thunar)$"
+        "size 50% 50%, class:^(mpv|foot|vesktop|discord|thunar|.blueman-manager-wrapped|org.pulseaudio.pavucontrol|io.github.lact-linux)$"
         "size 50% 50%, title:^(Picture in picture)$"
-        "opacity 0.95 0.95, class:^(thunar|Spotify)$"
+        "opacity 0.95 0.95, class:^(thunar|Spotify|.blueman-manager-wrapped|org.pulseaudio.pavucontrol|io.github.lact-linux)$"
+        # Games
+        "tag +games, class:^(cs2|gamescope|steam_app_2246340)$"
+        "tag +games, title:^(Path of Exile|Xonotic|ELDEN RING™|.*Minecraft.*1\.21\.4)"
+        "workspace 5, tag:games"
+        "immediate, tag:games"
+        # Overlay
+        ## APT
+        "tag +apt, title:(Awakened PoE Trade)"
+        "float, tag:apt"
+        "noblur, tag:apt"
+        "nofocus, tag:apt"
+        "noshadow, tag:apt"
+        "noborder, tag:apt"
+        "size 100% 100%, tag:apt"
+        "center, tag:apt"
+
+        # Screen share
+        "opacity 0.0 override, class:^(xwaylandvideobridge)$"
+        "noanim, class:^(xwaylandvideobridge)$"
+        "noinitialfocus, class:^(xwaylandvideobridge)$"
+        "maxsize 1 1, class:^(xwaylandvideobridge)$"
+        "noblur, class:^(xwaylandvideobridge)$"
+        "nofocus, class:^(xwaylandvideobridge)$"
       ];
       layerrule = [
         "noanim, walker"
@@ -241,31 +272,5 @@
         "noanim, hyprpicker"
       ];
     };
-    extraConfig = ''
-      general {
-        col.active_border = rgba(F7DCDE39)
-        col.inactive_border = rgba(A58A8D30)
-      }
-      # PoE
-      windowrulev2 = tag +poe, title:(Path of Exile)
-      windowrulev2 = tag +poe, class:(steam_app_238960)
-      windowrulev2 = workspace 1, tag:poe
-      windowrulev2 = immediate, tag:poe
-
-      windowrulev2 = tag +apt, title:(Awakened PoE Trade)
-      windowrulev2 = float, tag:apt
-      windowrulev2 = noblur, tag:apt
-      windowrulev2 = nofocus, tag:apt # Disable auto-focus
-      windowrulev2 = noshadow, tag:apt
-      windowrulev2 = noborder, tag:apt
-      windowrulev2 = size 100% 100%, tag:apt
-      windowrulev2 = center, tag:apt
-
-      experimental {
-      #   hdr = true
-      #   wide_color_gamut = true
-        xx_color_management_v4 = true
-      }
-    '';
   };
 }

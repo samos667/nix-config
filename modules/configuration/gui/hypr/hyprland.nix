@@ -5,8 +5,9 @@
 }: {
   programs.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    portalPackage = with pkgs; xdg-desktop-portal-hyprland;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    # make sure to also set the portal package, so that they are in sync
+    portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
   security.pam.services.hyprlock = {};
 

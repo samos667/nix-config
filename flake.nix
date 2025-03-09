@@ -4,55 +4,50 @@
   inputs = {
     # Overlays
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-24.11";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix = {
-      url = "github:danth/stylix";
-    };
-
     hyprland = {
       type = "git";
       url = "https://github.com/hyprwm/Hyprland.git";
-      rev  = "3b99e906df8b439d65e740301940e57efc057012";
+      rev = "3b99e906df8b439d65e740301940e57efc057012";
       submodules = true;
       # url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     anyrun = {
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     agenix = {
       url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
-    nixvim = {
-      url = "github:samos667/nivis";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # umu = {
-    #   url = "git+https://github.com/Open-Wine-Components/umu-launcher/?dir=packaging\/nix&submodules=1";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixvim.url = "github:samos667/nivis";
   };
 
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-stable,
     home-manager,
     agenix,
     stylix,
@@ -66,13 +61,14 @@
       system,
       username,
       homeDirectory,
+      vars,
       hostname ? null,
       modules ? [],
       includeHomeManager ? true,
     }:
       nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit inputs username homeDirectory hostname system;};
+        specialArgs = {inherit inputs username homeDirectory hostname system vars;};
         modules =
           [
             ./hosts/${hostname}
@@ -86,12 +82,12 @@
                 home-manager = {
                   useUserPackages = true;
                   useGlobalPkgs = false;
-                  extraSpecialArgs = {inherit inputs system username homeDirectory;};
+                  extraSpecialArgs = {inherit inputs username homeDirectory hostname system vars;};
                   users.${username} = import ./home/${hostname}/home.nix {
                     inherit inputs username homeDirectory;
                     pkgs = nixpkgsFor.${system};
                   };
-                  backupFileExtension = "backuppp";
+                  backupFileExtension = "oldd";
                 };
               }
             ]
@@ -100,15 +96,34 @@
           ++ modules;
       };
   in {
-    nixosConfigurations.masterace = createNixosConfiguration {
-      system = "x86_64-linux";
-      username = "sam";
-      homeDirectory = "/home/sam";
-      hostname = "masterace";
-      modules = [
-        stylix.nixosModules.stylix
-        agenix.nixosModules.default
-      ];
+    nixosConfigurations = {
+      masterace = createNixosConfiguration {
+        system = "x86_64-linux";
+        username = "sam";
+        homeDirectory = "/home/sam";
+        hostname = "masterace";
+        vars = {
+          cpu = "intel";
+          gpu = "amd";
+          de = "rational_pulsion";
+        };
+        modules = [
+          stylix.nixosModules.stylix
+          agenix.nixosModules.default
+        ];
+      };
+      loulou = createNixosConfiguration {
+        system = "aarch64-linux";
+        username = "sam";
+        homeDirectory = "/home/sam";
+        hostname = "loulou";
+        vars = {
+          soc = "nanopi5";
+        };
+        modules = [
+          agenix.nixosModules.default
+        ];
+      };
     };
   };
 }

@@ -3,15 +3,11 @@
     syncthing
     solaar
     exfat
-    xwaylandvideobridge
     teams-for-linux
     vesktop
-    mumble
+    discord
     newsflash
     httpie-desktop
-
-    # misc
-    ventoy # multi-boot usb creator
   ];
 
   programs.obs-studio = {
@@ -22,6 +18,14 @@
       obs-pipewire-audio-capture
       wlrobs
     ];
+  };
+  xdg.configFile."obs-studio/themes/Catppuccin_Mocha.ovt".source = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/catppuccin/obs/refs/heads/main/themes/Catppuccin_Mocha.ovt";
+    sha256 = "sha256-6jatJRRojATjSjKDoOP6U1av927uoP1fQh4EB8+gfgs=";
+  };
+  xdg.configFile."obs-studio/themes/Catppuccin.obt".source = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/catppuccin/obs/refs/heads/main/themes/Catppuccin.obt";
+    sha256 = "sha256-k7zi1eJ/Hq54BTEVqo+94e9f2huV7u3DZ2DMmPXVR2E=";
   };
 
   services.syncthing.enable = true;

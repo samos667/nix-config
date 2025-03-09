@@ -1,9 +1,9 @@
 {config, ...}: let
   browser = "google-chrome.desktop";
-  editor = "nvim.desktop";
+  editor = "neovide.desktop";
   file-manager = "org.gnome.thunar.desktop";
-  image-viewer = "imv.desktop";
-  image-editor = "org.kde.gimp";
+  image-viewer = "swayimg.desktop";
+  document-viewer = "org.gnome.Evince.desktop";
   torrent = "qbittorrent.desktop";
   multimedia-viewer = "mpv.desktop";
 in {
@@ -20,8 +20,12 @@ in {
         "text/html" = browser;
 
         "x-scheme-handler/magnet" = torrent;
-        "application/pdf" = browser;
+
         "application/x-shellscript" = editor;
+        "text/plain" = editor;
+
+        "application/pdf" = document-viewer;
+        "application/x-cbz" = document-viewer;
 
         "image/jpeg" = image-viewer;
         "image/bmp" = image-viewer;

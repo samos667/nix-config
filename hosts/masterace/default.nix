@@ -4,7 +4,7 @@
     ../../modules/configuration/common.nix
     ../../modules/configuration/services/docker.nix
     ../../modules/configuration/services/kmscon.nix
-    ../../modules/configuration/services/ollama.nix
+    # ../../modules/configuration/services/ollama.nix
     ../../modules/configuration/services/ssh.nix
     ../../modules/configuration/services/zram.nix
     ../../modules/configuration/gui/hypr
@@ -17,5 +17,22 @@
     enable = true;
     pinentryPackage = pkgs.pinentry-gnome3;
     enableSSHSupport = true;
+  };
+  nix = {
+    settings = {
+      system-features = [
+        "kvm"
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "gccarch-rocketlake"
+      ];
+    };
+  };
+  nixpkgs.hostPlatform = {
+    gcc = {
+      arch = "rocketlake";
+      tune = "rocketlake";
+    };
   };
 }

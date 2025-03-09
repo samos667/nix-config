@@ -15,12 +15,11 @@
       popups = 1.0;
     };
     targets.qt = {
-      enable = true;
-      platform = "kde";
+      platform = "qtct";
     };
     fonts = {
       monospace = {
-        package = pkgs.fira-code-nerdfont;
+        package = pkgs.nerd-fonts.fira-code;
         name = "FiraCode Nerd Font";
       };
       sansSerif = {

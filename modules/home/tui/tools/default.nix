@@ -28,14 +28,13 @@
 
     # misc
     cowsay
-    bitwarden-cli
+    # bitwarden-cli
     restic
     kubectl
     krew
     vault
     talosctl
     istioctl
-    lens
     k9s
     kubernetes-helm
     cilium-cli
@@ -62,7 +61,7 @@
     asciinema
     asciinema-agg
     lazygit
-    backblaze-b2
+    # backblaze-b2
     k8sgpt
     kustomize
     glab
