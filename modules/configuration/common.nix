@@ -24,7 +24,7 @@
 
   # Packages mandatory
   environment.systemPackages = with pkgs; [
-    vi
+    vim
     wget
     git
     zip

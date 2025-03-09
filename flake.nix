@@ -121,7 +121,7 @@
           soc = "nanopi5";
         };
         modules = [
-          agenix.nixosModules.default
+          # agenix.nixosModules.default
         ];
       };
     };
