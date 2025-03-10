@@ -1,11 +1,10 @@
-{
-  lib,
-  inputs,
-  pkgs,
-  ...
-}: let
-  adlist = inputs.adblock-unbound.packages.${pkgs.system};
-in {
+{lib, ...}: {
+  import = [
+    ./dhcp-kea.nix
+    ./dns-unbound.nix
+    # ./ha-kube.nix
+  ];
+
   networking = {
     firewall.enable = true;
     nftables.enable = true;
@@ -14,11 +13,6 @@ in {
       enable = true;
       externalInterface = "wan0";
       internalInterfaces = ["lan0"];
-    };
-
-    firewall.interfaces."lan0" = {
-      allowedTCPPorts = [22];
-      allowedUDPPorts = [53];
     };
 
     # Disable legacy DHCP
@@ -63,83 +57,4 @@ in {
       };
     };
   };
-
-  services.kea.dhcp4 = {
-    enable = true;
-    settings = {
-      interfaces-config = {
-        interfaces = ["lan0"];
-      };
-      lease-database = {
-        type = "memfile";
-        persist = true;
-        name = "/var/lib/kea/dhcp4.leases";
-      };
-      subnet4 = [
-        {
-          id = 1;
-          subnet = "172.16.67.0/24";
-          pools = [{pool = "172.16.67.50 - 172.16.67.100";}];
-          option-data = [
-            {
-              name = "routers";
-              data = "172.16.67.254";
-            }
-            {
-              name = "domain-name-servers";
-              data = "172.16.67.254";
-            }
-          ];
-        }
-      ];
-      valid-lifetime = 7200;
-      renew-timer = 3600;
-      rebind-timer = 6300;
-    };
-  };
-
-  services.unbound = {
-    enable = true;
-    settings = {
-      server = {
-        include = [
-          "\"${adlist.unbound-adblockStevenBlack}\""
-        ];
-        interface = ["172.16.67.254"];
-        port = 53;
-        access-control = [
-          "172.16.67.0/24 allow"
-        ];
-        harden-glue = true;
-        harden-dnssec-stripped = true;
-        use-caps-for-id = false;
-        hide-identity = true;
-        hide-version = true;
-        prefetch = true;
-        edns-buffer-size = 1232;
-        so-rcvbuf = "1m";
-        auto-trust-anchor-file = "/var/lib/unbound/root.key";
-
-        local-zone = [
-          ''"ekip.cc." static''
-        ];
-
-        local-data = [
-          ''"loulou.ekip.cc. 3600 IN A 172.16.67.254"''
-        ];
-      };
-
-      forward-zone = [
-        {
-          name = ".";
-          forward-addr = [
-            "1.1.1.1@853#cloudflare-dns.com"
-            "1.0.0.1@853#cloudflare-dns.com"
-          ];
-          forward-tls-upstream = true;
-        }
-      ];
-    };
-  };
-  networking.nameservers = ["172.16.67.254"];
 }

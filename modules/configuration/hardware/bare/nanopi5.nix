@@ -4,13 +4,7 @@
   # TODO propose to upstream
 
   powerManagement.cpuFreqGovernor = "schedutil";
-  hardware = {
-    deviceTree.name = "rockchip/rk3568-nanopi-r5c.dtb";
-    firmware = [
-      #TODO ?
-      pkgs.linux-firmware
-    ];
-  };
+
   environment.etc = {
     "systemd/journald.conf.d/99-storage.conf".text = ''
       [Journal]
@@ -56,6 +50,13 @@
       };
       timeout = 1;
     };
+  };
+
+  hardware = {
+    deviceTree.name = "rockchip/rk3568-nanopi-r5c.dtb";
+    firmware = [
+      pkgs.linux-firmware
+    ];
   };
 
   fileSystems = {
