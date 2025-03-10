@@ -43,6 +43,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim.url = "github:samos667/nivis";
+
+    adblock-unbound = {
+      url = "github:MayNiklas/nixos-adblock-unbound";
+      inputs = {
+        adblockStevenBlack.follows = "adblockStevenBlack";
+      };
+    };
+    # Adblocking lists for DNS servers
+    # input here, so it will get updated by nix flake update
+    adblockStevenBlack = {
+      url = "github:StevenBlack/hosts";
+      flake = false;
+    };
   };
 
   outputs = {

@@ -1,4 +1,11 @@
-{lib, ...}: {
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
+}: let
+  adlist = inputs.adblock-unbound.packages.${pkgs.system};
+in {
   networking = {
     firewall.enable = true;
     nftables.enable = true;
@@ -103,6 +110,9 @@
     enable = true;
     settings = {
       server = {
+        include = [
+          "\"${adlist.unbound-adblockStevenBlack}\""
+        ];
         interface = ["172.16.67.254"];
         port = 53;
         access-control = [
