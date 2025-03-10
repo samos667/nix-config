@@ -1,5 +1,5 @@
 {lib, ...}: {
-  import = [
+  imports = [
     ./dhcp-kea.nix
     ./dns-unbound.nix
     # ./ha-kube.nix
@@ -12,13 +12,14 @@
     nat = {
       enable = true;
       externalInterface = "wan0";
-      internalInterfaces = ["lan0"];
+      internalInterfaces = ["vlan667"];
     };
 
     # Disable legacy DHCP
     interfaces = {
       "lan0".useDHCP = lib.mkForce false;
       "wan0".useDHCP = lib.mkForce false;
+      "vlan667".useDHCP = lib.mkForce false;
     };
   };
 
@@ -41,11 +42,12 @@
     networks = {
       "10-lan0" = {
         matchConfig.Name = "lan0";
-        address = [
-          "172.16.67.254/24"
+        vlan = [
+          "vlan667"
         ];
         networkConfig.ConfigureWithoutCarrier = true;
       };
+
       "10-wan0" = {
         matchConfig.Name = "wan0";
         networkConfig = {
@@ -54,6 +56,21 @@
         };
         # make routing on this interface a dependency for network-online.target
         linkConfig.RequiredForOnline = "routable";
+      };
+
+      "11-vlan669" = {
+        matchConfig.Name = "vlan669";
+        networkConfig.ConfigureWithoutCarrier = true;
+        address = ["172.16.67.254/24"];
+      };
+    };
+    netdevs = {
+      "vlan667" = {
+        netdevConfig = {
+          Name = "vlan667";
+          Kind = "vlan";
+        };
+        vlanConfig.Id = 667;
       };
     };
   };

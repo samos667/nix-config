@@ -6,8 +6,10 @@
 }: let
   adlist = inputs.adblock-unbound.packages.${pkgs.system};
 in {
-  firewall.interfaces."lan0".allowedUDPPorts = [53];
-  networking.nameservers = lib.mkForce ["172.16.67.254"];
+  networking = {
+    nameservers = lib.mkForce ["172.16.67.254"];
+    firewall.interfaces."lan0".allowedUDPPorts = [53];
+  };
   services.unbound = {
     enable = true;
     settings = {

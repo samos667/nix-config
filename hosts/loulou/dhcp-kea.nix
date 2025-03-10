@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       interfaces-config = {
-        interfaces = ["lan0"];
+        interfaces = ["vlan667"];
       };
       lease-database = {
         type = "memfile";
