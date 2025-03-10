@@ -7,7 +7,10 @@
     # ../../modules/configuration/users/sam.nix # It's me :) #TODO make secret mount optionnable depending the host
   ];
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    openFirewall = false;
+  };
 
   users.users.sam = {
     shell = pkgs.nushell;

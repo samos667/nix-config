@@ -8,7 +8,7 @@
 in {
   networking = {
     nameservers = lib.mkForce ["172.16.67.254"];
-    firewall.interfaces."lan0".allowedUDPPorts = [53];
+    firewall.interfaces."vlan667".allowedUDPPorts = [53];
   };
   services.unbound = {
     enable = true;

@@ -3,7 +3,10 @@
     enable = true;
     settings = {
       interfaces-config = {
-        interfaces = ["vlan667"];
+        interfaces = [
+          "lan0" # IDK, if I no set it vlan667 is not listening ?
+          "vlan667"
+        ];
       };
       lease-database = {
         type = "memfile";

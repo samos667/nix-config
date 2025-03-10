@@ -8,6 +8,7 @@
   networking = {
     firewall.enable = true;
     nftables.enable = true;
+    firewall.interfaces."vlan667".allowedTCPPorts = [22];
 
     nat = {
       enable = true;
@@ -58,8 +59,8 @@
         linkConfig.RequiredForOnline = "routable";
       };
 
-      "11-vlan669" = {
-        matchConfig.Name = "vlan669";
+      "11-vlan667" = {
+        matchConfig.Name = "vlan667";
         networkConfig.ConfigureWithoutCarrier = true;
         address = ["172.16.67.254/24"];
       };
